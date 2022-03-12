@@ -12,7 +12,6 @@ import user from "./modules/user";
 /*
   config
     path                路径
-    fullPath            完整路径
     name                唯一name 大驼峰
     redirect            重定向(默认 '')
     component           路由对应组件
@@ -111,9 +110,8 @@ router.afterEach((to: any) => {
   }
   // 添加访问过路由
   if (to.meta && !to.meta.notNeedAuth) {
-    const { fullPath, name, meta, params, query } = to;
+    const { name, meta, params, query } = to;
     store.commit("tagsView/ADD_VISITED_VIEW", {
-      fullPath,
       name,
       meta,
       params,

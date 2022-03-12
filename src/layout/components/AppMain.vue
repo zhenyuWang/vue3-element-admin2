@@ -28,7 +28,7 @@ import NavBar from "./NavBar/index.vue";
 const store = useStore();
 const cachedViews = store.getters.cachedViews;
 const route = useRoute();
-const key = computed(() => route.fullPath);
+const key = computed(() => route.name);
 </script>
 <style lang="scss" scoped>
 .app_main {

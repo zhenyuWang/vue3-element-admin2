@@ -15,7 +15,47 @@ import { useRoute } from "vue-router";
 import Logo from "./Logo.vue";
 import SlideBarItem from "./Item.vue";
 const store = useStore();
-const routes = store.getters.routes;
+// 处理路由多层（超过两层）嵌套，缓存失效问题
+function handleRouteNested(routes: any) {
+  routes.forEach((list: any) => {
+    // 如果是多层嵌套路由
+    if (list.name === "NestRoute") {
+      const child1Children = [],
+        child2Children = [];
+      for (let i = 0; i < list.children.length; i++) {
+        if (list.children[i].parentName) {
+          if (list.children[i].parentName === "Child1") {
+            child1Children.push(...list.children.splice(i, 1));
+            i--;
+          } else if (list.children[i].parentName === "Child2") {
+            child2Children.push(...list.children.splice(i, 1));
+            i--;
+          }
+        }
+      }
+      if (child2Children.length) {
+        list.children.unshift({
+          path: "child2",
+          name: "Child2",
+          meta: { title: "子级2", needCache: true },
+          component: () => import("@/views/NestRoute/Child12/index.vue"),
+          children: child2Children,
+        });
+      }
+      if (child1Children.length) {
+        list.children.unshift({
+          path: "child1",
+          name: "Child1",
+          meta: { title: "子级1", needCache: true },
+          component: () => import("@/views/NestRoute/Child1/index.vue"),
+          children: child1Children,
+        });
+      }
+    }
+  });
+  return routes;
+}
+const routes = handleRouteNested(store.getters.routes);
 const activeMenu = computed(() => useRoute().name);
 const isCollapse = computed(() => useStore().getters.isCollapse);
 </script>
