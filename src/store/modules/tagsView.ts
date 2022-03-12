@@ -26,8 +26,9 @@ export default {
     },
     // 删除缓存路由
     DELETE_CACHE_VIEW(state: TagsViewState, name: string) {
-      const index = state.cachedViews.indexOf(name);
-      if (index > -1) state.cachedViews.splice(index, 1);
+      state.cachedViews = state.cachedViews.filter(
+        (item: string) => item !== name
+      );
     },
     // 清空缓存路由
     CLEAR_CACHE_VIEW(state: TagsViewState) {

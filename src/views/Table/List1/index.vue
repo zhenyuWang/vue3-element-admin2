@@ -35,11 +35,10 @@ import { reactive } from "vue";
 import { useRouter } from "vue-router";
 import { apiList1 } from "@/api/table";
 import { ElLoading } from "element3";
-const list = reactive([
-  {
-    data: [],
-  },
-]);
+const router = useRouter();
+const list = reactive({
+  data: [],
+});
 const param = reactive({
   pageNo: 1,
   pageSize: 10,
@@ -57,7 +56,6 @@ const getList = () => {
   });
 };
 getList();
-const router = useRouter();
 const handleEdit = (id: string) => {
   router.push({
     name: "TableList1Edit",

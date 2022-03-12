@@ -3,23 +3,26 @@
 </template>
 
 <script setup lang="ts">
-// import { defineProps, defineEmits, ref, watch } from "vue";
-import { defineProps, ref, onMounted } from "vue";
+import { defineProps, onMounted, onUnmounted } from "vue";
 const props = defineProps({
   id: {
     type: String,
     required: true,
   },
-  disabled: {
+  content: {
+    type: String,
+    required: true,
+  },
+  readonly: {
     type: Boolean,
     default: false,
   },
 });
-const content = ref("");
 // tinymce 初始化配置
 onMounted(() => {
   (window as any).tinymce.init({
     selector: `#${props.id}`,
+    readonly: props.readonly,
     language_url: "/tinymce/zh_CN.js", //语言包
     language: "zh_CN",
     height: 300, // 高度
@@ -36,13 +39,13 @@ onMounted(() => {
     images_upload_credentials: true,
     // 插件
     plugins: [
-      "advlist autolink lists link image charmap print preview anchor",
-      "searchreplace visualblocks code fullscreen",
+      "advlist autolink lists link image charmap print anchor",
+      "searchreplace  code",
       "insertdatetime media table paste code help wordcount",
     ],
     // 工具栏
     toolbar:
-      "fontselect fontsizeselect link lineheight forecolor backcolor bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | image quicklink h2 h3 blockquote table numlist bullist preview fullscreen",
+      "fontselect fontsizeselect link lineheight forecolor backcolor bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | image quicklink h2 h3 blockquote table numlist bullist",
     // 图片上传三个参数，图片数据，成功时的回调函数，失败时的回调函数
     images_upload_handler: function (
       blobInfo: any,
@@ -66,5 +69,10 @@ onMounted(() => {
       //   });
     },
   });
+});
+// 组件卸载时清除当前实例，不然再次进入页面会无法实例化
+onUnmounted(() => {
+  const instance = (window as any).tinymce.get(`${props.id}`);
+  if (instance) instance.remove();
 });
 </script>

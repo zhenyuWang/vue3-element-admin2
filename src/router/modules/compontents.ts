@@ -9,7 +9,7 @@ export default {
     {
       path: "tinymce",
       name: "TinymceDemo",
-      meta: { title: "富文本", needCache: true },
+      meta: { title: "富文本", needCache: false },
       component: () => import("@/views/Component/Tinymce.vue"),
     },
   ],
