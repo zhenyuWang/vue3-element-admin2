@@ -4,11 +4,11 @@
 
 #### 介绍
 
-一个基于 Vite+Vue3+Vue Router+Vuex+TS+Element3+axios+Jest+Cypress 的后台管理系统
+一个基于 Vite+Vue3+Vue Router+Pinia+TS+ElementPlus+axios+Jest+Cypress 的后台管理系统
 
 #### 技术栈
 
-Vite+Vue3+Vue Router+Vuex+TS+Element3+axios+Jest+Cypress
+Vite+Vue3+Vue Router+Pinia+TS+ElementPlus+axios+Jest+Cypress
 
 #### 安装
 
