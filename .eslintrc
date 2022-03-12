@@ -6,6 +6,7 @@
     "es2021": true
   },
   "extends": [
+    "plugin:vue/base",
     "plugin:vue/vue3-recommended",
     "eslint:recommended",
     "@vue/typescript/recommended",
@@ -18,7 +19,8 @@
   },
   "rules": {
     // Enable vue/script-setup-uses-vars rule
-    "vue/script-setup-uses-vars": "erroe",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["off"],
     // ts每个函数都要显式声明返回值
     "@typescript-eslint/explicit-module-boundary-types": "off",
     // 关闭 ts any type 校验
