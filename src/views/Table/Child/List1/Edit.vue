@@ -5,33 +5,25 @@
     <div>角色：{{ userInfo.role }}</div>
   </div>
 </template>
-<script>
-import { defineComponent, reactive } from "vue";
+<script setup lang="ts">
+import { defineProps, reactive } from "vue";
 import { apiItemInfo } from "@/api/table";
-export default defineComponent({
-  name: "TableChildList1Edit",
-  props: {
-    id: {
-      type: String,
-      required: true,
-    },
-  },
-  setup(props) {
-    const getInfo = () => {
-      apiItemInfo({ id: props.id }).then((res) => {
-        userInfo.data = res.body.data;
-      });
-    };
-    const userInfo = reactive({
-      data: {
-        name: "",
-        role: "",
-      },
-    });
-    getInfo();
-    return {
-      userInfo,
-    };
+const props = defineProps({
+  id: {
+    type: String,
+    required: true,
   },
 });
+const userInfo = reactive({
+  name: "",
+  role: "",
+});
+const getInfo = () => {
+  apiItemInfo({ id: props.id }).then((res) => {
+    const data = res.body.data;
+    userInfo.name = data.name;
+    userInfo.role = data.role;
+  });
+};
+getInfo();
 </script>

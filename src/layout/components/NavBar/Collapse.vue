@@ -4,24 +4,12 @@
     <span v-else class="fontsize_20 el-icon-s-fold"></span>
   </div>
 </template>
-<script>
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import { computed } from "vue";
 import { useStore } from "vuex";
-export default defineComponent({
-  name: "",
-  setup() {
-    const store = useStore();
-    const changeCollapse = () => {
-      store.commit("setting/SET_COLLAPSE", !store.getters.isCollapse);
-    };
-    return {
-      changeCollapse,
-    };
-  },
-  computed: {
-    isCollapse() {
-      return useStore().getters.isCollapse;
-    },
-  },
-});
+const store = useStore();
+const changeCollapse = () => {
+  store.commit("setting/SET_COLLAPSE", !store.getters.isCollapse);
+};
+const isCollapse = computed(() => useStore().getters.isCollapse);
 </script>

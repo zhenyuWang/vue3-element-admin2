@@ -8,31 +8,16 @@
     </el-menu>
   </el-aside>
 </template>
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import { computed } from "vue";
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";
 import Logo from "./Logo.vue";
 import SlideBarItem from "./Item.vue";
-export default defineComponent({
-  name: "",
-  components: { Logo, SlideBarItem },
-  setup() {
-    const store = useStore();
-    const routes = store.getters.routes;
-    return {
-      routes,
-    };
-  },
-  computed: {
-    activeMenu() {
-      return useRoute().name;
-    },
-    isCollapse() {
-      return useStore().getters.isCollapse;
-    },
-  },
-});
+const store = useStore();
+const routes = store.getters.routes;
+const activeMenu = computed(() => useRoute().name);
+const isCollapse = computed(() => useStore().getters.isCollapse);
 </script>
 <style lang="scss" scoped>
 .el-aside {

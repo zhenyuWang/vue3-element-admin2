@@ -9,15 +9,15 @@ import nestRoute from "./modules/nestRoute";
 import compontents from "./modules/compontents";
 import user from "./modules/user";
 
-/* 
-  config 
+/*
+  config
     path                路径
     fullPath            完整路径
     name                唯一name 大驼峰
     redirect            重定向(默认 '')
     component           路由对应组件
     hidden:true         是否在左侧菜单隐藏(默认 false)
-    meta                
+    meta
       title             名称 (默认 '')
       icon              左侧菜单icon (默认 '')
       notNeedAuth:true  该路由是否不需要鉴权(默认 false)
@@ -36,7 +36,7 @@ export const routes = [
   // 匹配所有路径  vue2使用*  vue3使用/:pathMatch(.*)或/:catchAll(.*)
   {
     path: "/404",
-    name: "404",
+    name: "NotFund",
     hidden: true,
     meta: { notNeedAuth: true },
     component: () => import("@/views/404.vue"),
@@ -86,7 +86,7 @@ const router = createRouter({
 
 // 路由前置守卫
 router.beforeEach((to) => {
-  /* 
+  /*
     false 以取消导航
     一个路由
     不返回或者返回true 则去to

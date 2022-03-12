@@ -9,29 +9,19 @@
     </el-dropdown-menu>
   </el-dropdown>
 </template>
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import { computed } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
-export default defineComponent({
-  name: "",
-  setup() {
-    const store = useStore();
-    const router = useRouter();
-    const goUserInfo = () => {
-      router.push({ name: "UserInfo" });
-    };
-    const signout = () => {
-      store.dispatch("user/signout").then(() => {
-        router.push({ name: "Login" });
-      });
-    };
-    return { goUserInfo, signout };
-  },
-  computed: {
-    avatar() {
-      return useStore().getters.userInfo.avatar;
-    },
-  },
-});
+const store = useStore();
+const router = useRouter();
+const goUserInfo = () => {
+  router.push({ name: "UserInfo" });
+};
+const signout = () => {
+  store.dispatch("user/signout").then(() => {
+    router.push({ name: "Login" });
+  });
+};
+const avatar = computed(() => useStore().getters.userInfo.avatar);
 </script>

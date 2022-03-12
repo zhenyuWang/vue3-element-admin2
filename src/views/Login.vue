@@ -28,62 +28,52 @@
     </div>
   </div>
 </template>
-<script>
-import { defineComponent, ref, reactive, toRefs } from "vue";
+<script lang="ts">
+export default {
+  name: "Login",
+};
+</script>
+<script setup lang="ts">
+import { ref, reactive, toRefs } from "vue";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
-export default defineComponent({
-  name: "Login",
-  setup() {
-    // sotre实例
-    const store = useStore();
-    // 路由实例
-    const router = useRouter();
-    // 表单
-    const form = ref(null);
-    // 请求参数
-    const param = reactive({
-      param: {
-        name: "",
-        password: "",
-      },
-    });
-    // 表单校验规则
-    const rules = reactive({
-      rules: {
-        name: [
-          { required: true, message: "请输入账号", trigger: "blur" },
-          // { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-        ],
-        password: [{ required: true, message: "请输入密码", trigger: "blur" }],
-      },
-    });
-    const passInputType = ref("password");
-    const changeInputType = (val) => {
-      passInputType.value = val;
-    };
-    // 登录
-    const login = () => {
-      form.value.validate((valid) => {
-        if (valid) {
-          store.dispatch("user/login", param.param).then(() => {
-            router.push({ name: "Home" });
-          });
-        } else {
-          return false;
-        }
-      });
-    };
-    return {
-      form,
-      ...toRefs(param),
-      ...toRefs(rules),
-      passInputType,
-      changeInputType,
-      login,
-    };
+// sotre实例
+const store = useStore();
+// 路由实例
+const router = useRouter();
+// 表单
+const form = ref(null);
+// 请求参数
+const param = reactive({
+  name: "",
+  password: "",
+});
+// 表单校验规则
+const rules = reactive({
+  rules: {
+    name: [
+      { required: true, message: "请输入账号", trigger: "blur" },
+      // { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+    ],
+    password: [{ required: true, message: "请输入密码", trigger: "blur" }],
   },
 });
+const passInputType = ref("password");
+const changeInputType = (val: string) => {
+  passInputType.value = val;
+};
+// 登录
+const login = () => {
+  (form as any).value.validate((valid: boolean) => {
+    if (valid) {
+      store.dispatch("user/login", param).then(() => {
+        router.push({ name: "Home" });
+      });
+    } else {
+      return false;
+    }
+  });
+};
 </script>
 <style lang="scss" scoped>
 .login_main {

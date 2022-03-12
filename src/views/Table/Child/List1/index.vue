@@ -20,49 +20,40 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, onMounted } from "vue";
-import { useRouter } from "vue-router";
-import { apiList1 } from "@/api/table.ts";
-import { ElLoading } from "element3";
-export default defineComponent({
+export default {
   name: "TableChildList1",
-  components: {},
-  setup() {
-    const list = reactive({
-      data: [],
-    });
-    const param = reactive({
-      pageNo: 1,
-      pageSize: 10,
-    });
-    const getList = () => {
-      const loading = ElLoading.service({
-        fullscreen: false,
-        target: ".el-table__body-wrapper",
-        text: "Loading...",
-        spinner: "el-icon-loading",
-      });
-      apiList1(param).then((res) => {
-        list.data = res.body.data;
-        loading.close();
-      });
-    };
-    onMounted(() => {
-      getList();
-    });
-    const router = useRouter();
-    const handleEdit = (item: any) => {
-      router.push(`/table/child/list1/edit/${item.id}`);
-    };
-    const handleDelete = (item: any) => {
-      console.log(`del ${item.id}`);
-    };
-    return {
-      list,
-      param,
-      handleEdit,
-      handleDelete,
-    };
-  },
+};
+</script>
+<script setup lang="ts">
+import { reactive } from "vue";
+import { useRouter } from "vue-router";
+import { apiList1 } from "@/api/table";
+import { ElLoading } from "element3";
+const list = reactive({
+  data: [],
 });
+const param = reactive({
+  pageNo: 1,
+  pageSize: 10,
+});
+const getList = () => {
+  const loading = ElLoading.service({
+    fullscreen: false,
+    target: ".el-table__body-wrapper",
+    text: "Loading...",
+    spinner: "el-icon-loading",
+  });
+  apiList1(param).then((res: any) => {
+    list.data = res.body.data;
+    loading.close();
+  });
+};
+getList();
+const router = useRouter();
+const handleEdit = (item: any) => {
+  router.push(`/table/child/list1/edit/${item.id}`);
+};
+const handleDelete = (item: any) => {
+  console.log(`del ${item.id}`);
+};
 </script>

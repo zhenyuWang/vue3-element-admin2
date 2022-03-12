@@ -1,7 +1,7 @@
 <template>
   <template v-if="!item.hidden">
     <template v-if="item.children">
-      <template v-if="isOnlyChild(item)">
+      <template v-if="isOnlyOneChild(item)">
         <SliderBarItem
           :item="
             Object.assign(
@@ -32,26 +32,22 @@
     </el-menu-item>
   </template>
 </template>
-<script>
-import { defineComponent } from "vue";
-export default defineComponent({
+<script lang="ts">
+export default {
   name: "SliderBarItem",
-  components: {},
-  props: {
-    item: {
-      type: Object,
-      required: true,
-    },
-  },
-  setup() {
-    const isOnlyChild = (item) => {
-      return item.children && item.children.length === 1;
-    };
-    return {
-      isOnlyChild,
-    };
+};
+</script>
+<script setup lang="ts">
+import { defineProps } from "vue";
+defineProps({
+  item: {
+    type: Object,
+    required: true,
   },
 });
+const isOnlyOneChild = (item: any): boolean => {
+  return item.children && item.children.length === 1;
+};
 </script>
 <style lang="scss" scoped>
 .el-menu-item {

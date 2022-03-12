@@ -8,16 +8,11 @@
   </div>
   <VisitedViews />
 </template>
-<script>
-import { defineComponent } from "vue";
+<script setup lang="ts">
 import Collapse from "./Collapse.vue";
 import Breadcrumb from "./Breadcrumb.vue";
 import AvatarDropDown from "./AvatarDropDown.vue";
 import VisitedViews from "./VisitedViews.vue";
-export default defineComponent({
-  name: "",
-  components: { Collapse, Breadcrumb, AvatarDropDown, VisitedViews },
-});
 </script>
 <style lang="scss" scoped>
 .navbar {

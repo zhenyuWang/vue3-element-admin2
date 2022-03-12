@@ -4,21 +4,16 @@
   <el-button class="plus" type="primary" @click="count++"> plus </el-button>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from "vue";
-export default defineComponent({
-  name: "HelloWorld",
-  props: {
-    msg: {
-      type: String,
-      required: true,
-    },
-  },
-  setup() {
-    const count = ref(0);
-    return { count };
+<script setup lang="ts">
+import { defineProps, ref } from "vue";
+// 获取 props
+defineProps({
+  msg: {
+    type: String,
+    required: true,
   },
 });
+const count = ref(0);
 </script>
 <style lang="scss" scoped>
 p {

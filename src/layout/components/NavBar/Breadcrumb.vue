@@ -11,20 +11,10 @@
     </el-breadcrumb>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import { computed } from "vue";
 import { useRoute } from "vue-router";
-export default defineComponent({
-  name: "",
-  setup() {
-    return {};
-  },
-  computed: {
-    titleList() {
-      return useRoute().matched;
-    },
-  },
-});
+const titleList = computed(() => useRoute().matched);
 </script>
 <style lang="scss" scoped>
 /* breadcrumb transition */

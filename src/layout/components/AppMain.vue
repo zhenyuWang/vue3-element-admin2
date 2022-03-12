@@ -19,26 +19,16 @@
     </el-container>
   </section>
 </template>
-<script lang="ts">
-import { defineComponent, ref, watchEffect } from "vue";
+<script setup lang="ts">
+import { computed } from "vue";
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";
 import SliderBar from "./SliderBar/index.vue";
 import NavBar from "./NavBar/index.vue";
-export default defineComponent({
-  components: { SliderBar, NavBar },
-  setup() {
-    const store = useStore();
-    const cachedViews = store.getters.cachedViews;
-    const route = useRoute();
-    const key = ref(route.fullPath);
-    watchEffect(() => (key.value = route.fullPath));
-    return {
-      cachedViews,
-      key,
-    };
-  },
-});
+const store = useStore();
+const cachedViews = store.getters.cachedViews;
+const route = useRoute();
+const key = computed(() => route.fullPath);
 </script>
 <style lang="scss" scoped>
 .app_main {

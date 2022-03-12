@@ -7,12 +7,10 @@
     >
   </div>
 </template>
-<script>
-import { defineComponent } from "vue";
-export default defineComponent({
-  name: "",
-  components: {},
-});
+<script lang="ts">
+export default {
+  name: "NotFund",
+};
 </script>
 <style lang="scss" scoped>
 .not_fund {
