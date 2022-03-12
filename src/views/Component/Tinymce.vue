@@ -1,7 +1,11 @@
 <template>
   <div>
-    <Tinymce @updateContent="updateTinymceContent" />
-    <Tinymce :disabled="true" @updateContent="updateTinymceContent" />
+    <Tinymce id="tinymce1" @updateContent="updateTinymceContent" />
+    <Tinymce
+      id="tinymce2"
+      :disabled="true"
+      @updateContent="updateTinymceContent"
+    />
   </div>
 </template>
 <script lang="ts">

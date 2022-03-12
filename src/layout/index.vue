@@ -1,4 +1,4 @@
-// 内容页主体架子
+// 内容页主体框架
 <template>
   <AppMain />
 </template>

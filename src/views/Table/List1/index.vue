@@ -7,10 +7,16 @@
       <el-table-column label="角色" align="center" width="100" prop="role" />
       <el-table-column label="操作" align="center">
         <template #default="scope">
-          <el-button size="mini" type="primary" @click="handleEdit(scope.row)"
+          <el-button
+            size="mini"
+            type="primary"
+            @click="handleEdit(scope.row.id)"
             >编辑</el-button
           >
-          <el-button size="mini" type="danger" @click="handleDelete(scope.row)"
+          <el-button
+            size="mini"
+            type="danger"
+            @click="handleDelete(scope.row.id)"
             >删除</el-button
           >
         </template>
@@ -29,9 +35,11 @@ import { reactive } from "vue";
 import { useRouter } from "vue-router";
 import { apiList1 } from "@/api/table";
 import { ElLoading } from "element3";
-const list = reactive({
-  data: [],
-});
+const list = reactive([
+  {
+    data: [],
+  },
+]);
 const param = reactive({
   pageNo: 1,
   pageSize: 10,
@@ -50,10 +58,15 @@ const getList = () => {
 };
 getList();
 const router = useRouter();
-const handleEdit = (item: any) => {
-  router.push(`/table/child/list1/edit/${item.id}`);
+const handleEdit = (id: string) => {
+  router.push({
+    name: "TableList1Edit",
+    params: {
+      id,
+    },
+  });
 };
-const handleDelete = (item: any) => {
-  console.log(`del ${item.id}`);
+const handleDelete = (id: string) => {
+  console.log(`del ${id}`);
 };
 </script>

@@ -24,7 +24,6 @@
     "*": "prettier -w -u"
   },
   "dependencies": {
-    "@tinymce/tinymce-vue": "4.0.4",
     "axios": "0.21.1",
     "element3": "0.0.40",
     "mockjs": "1.1.0",

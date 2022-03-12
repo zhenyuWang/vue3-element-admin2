@@ -38,7 +38,7 @@ function handleRouteNested(routes: any) {
           path: "child2",
           name: "Child2",
           meta: { title: "子级2", needCache: true },
-          component: () => import("@/views/NestRoute/Child12/index.vue"),
+          component: () => import("@/views/NestRoute/Child2/index.vue"),
           children: child2Children,
         });
       }
