@@ -1,0 +1,36 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2021": true
+  },
+  "extends": [
+    "plugin:vue/vue3-recommended",
+    "eslint:recommended",
+    "@vue/typescript/recommended",
+    "@vue/prettier",
+    "@vue/prettier/@typescript-eslint"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2021
+  },
+  "rules": {
+    // ts每个函数都要显式声明返回值
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    // 关闭 ts any type 校验
+    "@typescript-eslint/no-explicit-any": ["off"],
+    // 忽略 Require statement not part of import statement.
+    "@typescript-eslint/no-var-requires": "off",
+    // 在数组开括号后和闭括号前强制换行
+    "array-bracket-newline": "off",
+    // 强制数组元素间出现换行
+    "array-element-newline": "off",
+    // 要求或禁止在三元操作数中间换行
+    "multiline-ternary": "off",
+    // 要求或禁止在变量声明周围换行
+    "one-var-declaration-per-line": "off",
+    // 强制操作符使用一致的换行符
+    "operator-linebreak": "off"
+  }
+}
