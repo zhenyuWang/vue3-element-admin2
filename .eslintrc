@@ -13,9 +13,12 @@
     "@vue/prettier/@typescript-eslint"
   ],
   "parserOptions": {
-    "ecmaVersion": 2021
+    "ecmaVersion": 2015,
+    "sourceType": "module"
   },
   "rules": {
+    // Enable vue/script-setup-uses-vars rule
+    "vue/script-setup-uses-vars": "erroe",
     // ts每个函数都要显式声明返回值
     "@typescript-eslint/explicit-module-boundary-types": "off",
     // 关闭 ts any type 校验
