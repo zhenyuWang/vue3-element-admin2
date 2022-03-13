@@ -1,6 +1,6 @@
 <template>
   <div class="box t_center">
-    <img src="@/assets/img/avatar.png" alt="" />
+    <img src="@/assets/img/snail.png" alt="" />
     <hello-world
       msg="Vite2 + Vue3 + Pinia + ElementPlus + TS + jest + cypress buy running snail!"
     />

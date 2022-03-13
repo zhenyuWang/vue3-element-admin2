@@ -1,4 +1,4 @@
-import request from "../utils/request";
+import request from "@/utils/request";
 import type { Method } from "@/types/request";
 const curryRequest = (
   url: string,

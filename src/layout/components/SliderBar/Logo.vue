@@ -10,8 +10,9 @@
   padding: 10px 20px;
   background-color: #438afe;
   .logo {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
+    margin: -5px;
     background: url("@/assets/img/logo/logo.png");
     background-size: 100% 100%;
   }
