@@ -28,6 +28,8 @@
     "axios": "0.21.1",
     "element-plus": "^2.1.0",
     "mockjs": "1.1.0",
+    "pinia": "^2.0.11",
+    "pinia-plugin-persist": "^1.0.0",
     "vue": "^3.2.31",
     "vue-router": "^4.0.14",
     "vuex": "4.0.2"

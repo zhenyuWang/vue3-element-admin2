@@ -1,18 +1,8 @@
-import { createStore } from "vuex";
-import getters from "./getters";
-import user from "./modules/user";
-import permission from "./modules/permission";
-import tagsView from "./modules/tagsView";
-import setting from "./modules/setting";
+import { createPinia } from "pinia";
+// 使用 pinia 缓存插件
+import piniaPluginPersist from "pinia-plugin-persist";
 
-const modules: any = {
-  user,
-  permission,
-  tagsView,
-  setting,
-};
-const store = createStore({
-  modules,
-  getters,
-});
+const store = createPinia();
+store.use(piniaPluginPersist);
+
 export default store;

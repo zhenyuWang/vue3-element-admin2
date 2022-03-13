@@ -4,16 +4,16 @@
 </template>
 <script setup lang="ts">
 import { onMounted, onUnmounted } from "vue";
-import { useStore } from "vuex";
+import { useSettingStore } from "@/store/setting";
 import AppMain from "./components/AppMain.vue";
-const store = useStore(),
+const settingStore = useSettingStore(),
   width = 992,
   resizeHander = () => {
     const rect = document.body.getBoundingClientRect();
     if (rect.width > width) {
-      store.commit("setting/SET_COLLAPSE", false);
+      settingStore.setCollapse(false);
     } else {
-      store.commit("setting/SET_COLLAPSE", true);
+      settingStore.setCollapse(true);
     }
   };
 onMounted(() => {

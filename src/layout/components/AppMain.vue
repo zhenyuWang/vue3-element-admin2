@@ -21,12 +21,13 @@
 </template>
 <script setup lang="ts">
 import { computed } from "vue";
-import { useStore } from "vuex";
+import { storeToRefs } from "pinia";
+import { useTagsViewStore } from "@/store/tagsView";
 import { useRoute } from "vue-router";
 import SliderBar from "./SliderBar/index.vue";
 import NavBar from "./NavBar/index.vue";
-const store = useStore();
-const cachedViews = store.getters.cachedViews;
+const tagsViewStore = useTagsViewStore();
+const { cachedViews } = storeToRefs(tagsViewStore);
 const route = useRoute();
 const key = computed(() => route.name);
 </script>

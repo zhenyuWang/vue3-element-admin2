@@ -13,17 +13,15 @@
 </template>
 <script setup lang="ts">
 import { computed } from "vue";
-import { useStore } from "vuex";
+import { useUserStore } from "@/store/user";
 import { useRouter } from "vue-router";
-const store = useStore();
+const userStore = useUserStore();
 const router = useRouter();
 const goUserInfo = () => {
   router.push({ name: "UserInfo" });
 };
 const signout = () => {
-  store.dispatch("user/signout").then(() => {
-    router.push({ name: "Login" });
-  });
+  userStore.logout(router);
 };
-const avatar = computed(() => useStore().getters.userInfo.avatar);
+const avatar = computed(() => userStore.userInfo.avatar);
 </script>

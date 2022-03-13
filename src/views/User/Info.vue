@@ -14,14 +14,9 @@
     </div>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent } from "vue";
-import { useStore } from "vuex";
-export default defineComponent({
-  name: "",
-  setup() {
-    const userInfo = useStore().getters.userInfo;
-    return { userInfo };
-  },
-});
+<script setup lang="ts">
+import { storeToRefs } from "pinia";
+import { useUserStore } from "@/store/user";
+const userStore = useUserStore();
+const { userInfo } = storeToRefs(userStore);
 </script>

@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from "vue-router";
-import store from "@/store";
+import { useUserStore } from "@/store/user";
+import { useTagsViewStore } from "@/store/tagsView";
 
 /* Layout */
 import Layout from "@/layout/index.vue";
@@ -95,23 +96,25 @@ router.beforeEach((to) => {
   // 如果to需要鉴权
   if (!to.meta.notNeedAuth) {
     // 获取userInfo
-    const userInfo = store.getters.userInfo;
+    const userStore = useUserStore();
+    const userInfo = userStore.userInfo;
     // 如果未登录
-    if (!userInfo.name || !userInfo.roles.length) {
+    if (!userInfo.name || !userInfo.token) {
       return { name: "Login" };
     }
   }
 });
 // 路由后置守卫
 router.afterEach((to: any) => {
+  const tagsViewStore = useTagsViewStore();
   // 添加路由缓存
-  if (to.name && to.meta.needCache) {
-    store.commit("tagsView/ADD_CACHE_VIEW", to.name);
+  if (to.name && to.meta && to.meta.needCache) {
+    tagsViewStore.addCacheView(to.name);
   }
+  const { name, meta, params, query } = to;
   // 添加访问过路由
   if (to.meta && !to.meta.notNeedAuth) {
-    const { name, meta, params, query } = to;
-    store.commit("tagsView/ADD_VISITED_VIEW", {
+    tagsViewStore.addVisitedView({
       name,
       meta,
       params,

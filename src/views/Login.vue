@@ -1,14 +1,14 @@
 <template>
   <div
-    class="flex flex_justify_center login_main w_100 h_100"
+    class="flex flex_justify_center login_box w_100 h_100"
     @keyup.enter="login"
   >
     <!-- 中间盒子 -->
     <div class="content">
       <div class="title t_center c_fff">登录</div>
-      <el-form ref="form" :model="param" :rules="rules">
+      <el-form ref="form" :model="params" :rules="rules">
         <el-form-item prop="name">
-          <el-input v-model="param.name" placeholder="账号">
+          <el-input v-model="params.name" placeholder="账号">
             <template #prefix>
               <el-icon class="el-input__icon"><user /></el-icon>
             </template>
@@ -16,10 +16,10 @@
         </el-form-item>
         <el-form-item prop="password">
           <el-input
-            v-model="param.password"
+            v-model="params.password"
             placeholder="密码"
             show-password
-            autocomplete
+            autocomplete="on"
           >
             <template #prefix>
               <el-icon class="el-input__icon"><lock /></el-icon>
@@ -39,29 +39,26 @@ export default {
 };
 </script>
 <script setup lang="ts">
-import { ref, reactive, toRefs } from "vue";
-import { useStore } from "vuex";
+import { ref, reactive } from "vue";
+import { useUserStore } from "@/store/user";
 import { useRouter } from "vue-router";
-// sotre实例
-const store = useStore();
+const userStore = useUserStore();
 // 路由实例
 const router = useRouter();
 // 表单
 const form = ref(null);
 // 请求参数
-const param = reactive({
+const params = reactive({
   name: "",
   password: "",
 });
 // 表单校验规则
 const rules = reactive({
-  rules: {
-    name: [
-      { required: true, message: "请输入账号", trigger: "blur" },
-      // { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-    ],
-    password: [{ required: true, message: "请输入密码", trigger: "blur" }],
-  },
+  name: [
+    { required: true, message: "请输入账号", trigger: "blur" },
+    // { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+  ],
+  password: [{ required: true, message: "请输入密码", trigger: "blur" }],
 });
 const passInputType = ref("password");
 const changeInputType = (val: string) => {
@@ -71,7 +68,7 @@ const changeInputType = (val: string) => {
 const login = () => {
   (form as any).value.validate((valid: boolean) => {
     if (valid) {
-      store.dispatch("user/login", param).then(() => {
+      userStore.login(params).then(() => {
         router.push({ name: "Home" });
       });
     } else {
@@ -81,31 +78,28 @@ const login = () => {
 };
 </script>
 <style lang="scss" scoped>
-.login_main {
+.login_box {
   background-color: #2d3a4b;
   .content {
     width: 460px;
     margin-top: 200px;
-    title {
+    .title {
       font-size: 30px;
     }
     :deep(.el-form) {
       padding-top: 30px;
       .el-form-item {
-        padding-left: 10px;
         background-color: #283443;
-        border: 1px solid #434c58;
+        border: 1px solid #5b9bc8;
         border-radius: 4px;
         .el-input {
-          padding-right: 20px;
-          display: inline-block;
-          &::-webkit-scrollbar-corner {
-            background-color: transparent;
-          }
-          input.el-input__inner {
-            height: 50px;
-            font-size: 16px;
+          .el-input__inner {
             box-shadow: none;
+          }
+          input {
+            height: 50px;
+            padding-right: 30px;
+            font-size: 16px;
             background-color: transparent;
             border: none;
             color: #fff;

@@ -3,7 +3,7 @@
     <template v-for="view in visitedViews" :key="view.name">
       <div
         class="fontsize_12 c_666 pointer"
-        :class="{ active: currentRoute.name === view.name }"
+        :class="{ active: currentRouteName === view.name }"
         @click="goTargetView(view)"
         @contextmenu.prevent="mouseRightClick(view, $event)"
       >
@@ -35,39 +35,39 @@
 </template>
 <script setup lang="ts">
 import { reactive, ref, computed } from "vue";
-import { useStore } from "vuex";
+import { storeToRefs } from "pinia";
+import { useTagsViewStore } from "@/store/tagsView";
 import { useRoute, useRouter } from "vue-router";
-const store = useStore();
 const router = useRouter();
 const route = useRoute();
-
+const tagsViewStore = useTagsViewStore();
+// 获取当前路由
+const currentRouteName = computed(() => route.name);
+// 获取已访问路由
+const { visitedViews } = storeToRefs(tagsViewStore);
 // 跳转目标路由
 const goTargetView = (view: any) => {
   router.push(view);
 };
 // 删除已访问路由
 const delTargetVisited = (name: string) => {
-  store.dispatch("tagsView/deleteVisitedView", name);
+  tagsViewStore.deleteVisitedView(name);
   // 如果删除的是active路由，跳转访问路由最后一个
   if (name === route.name) {
-    const visitedViews = store.getters.visitedViews;
-    router.push({ name: visitedViews[visitedViews.length - 1].name });
+    router.push({
+      name: visitedViews.value[visitedViews.value.length - 1].name,
+    });
   }
 };
 // 当前右键view
 const mouseRightView = reactive({
-  data: {
-    name: "",
-    meta: {
-      fixed: false,
-    },
-  },
+  data: { name: "", meta: { fixed: "" } },
 });
 // 右键菜单html
 const menu = ref<any>();
 // 右键菜单是否显示
 const visible = ref(false);
-// 隐藏右键菜单
+// 关闭右键菜单
 const hideMenu = () => {
   visible.value = false;
 };
@@ -88,7 +88,7 @@ const mouseRightClick = (view: any, e: any) => {
 };
 // 刷新右键路由
 const refresh = async () => {
-  await store.commit("tagsView/DELETE_CACHE_VIEW", mouseRightView.data.name);
+  tagsViewStore.deleteCacheView(mouseRightView.data.name);
   if (mouseRightView.data.name === route.name) {
     await router.push({ name: "Home" });
     router.replace({ name: mouseRightView.data.name });
@@ -102,20 +102,19 @@ const close = () => {
 };
 // 右键关闭其他
 const closeOther = () => {
-  store.commit("tagsView/DELETE_OTHER_VISITED_VIEW", mouseRightView.data);
+  tagsViewStore.deleteOtherVisitedView(mouseRightView.data);
   if (mouseRightView.data.name !== route.name) {
     router.push({ name: mouseRightView.data.name });
   }
 };
 // 右键关闭所有
-const closeAll = () => {
-  store.commit("tagsView/CLEAR_CACHE_VIEW");
-  store.commit("tagsView/CLEAR_VISITED_VIEW");
-  const visitedViews = store.getters.visitedViews;
-  router.push({ name: visitedViews[visitedViews.length - 1].name });
+const closeAll = async () => {
+  await tagsViewStore.clearCacheView();
+  await tagsViewStore.clearVisitedView();
+  router.push({
+    name: visitedViews.value[visitedViews.value.length - 1].name,
+  });
 };
-const currentRoute = computed(() => useRoute());
-const visitedViews = computed(() => useStore().getters.visitedViews);
 </script>
 <style lang="scss" scoped>
 .visited_views {

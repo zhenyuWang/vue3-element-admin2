@@ -11,10 +11,10 @@ const curryRequest = (
 export function apiLogin(data: {
   name: string;
   password: string;
-}): PromiseLike<any> {
+}): Promise<any> {
   return curryRequest("login", "post", data);
 }
 // 退出登录
-export function apiSignout(): PromiseLike<any> {
+export function apiSignout(): Promise<any> {
   return curryRequest("signout", "post");
 }

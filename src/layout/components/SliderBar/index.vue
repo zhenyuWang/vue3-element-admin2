@@ -10,12 +10,22 @@
 </template>
 <script setup lang="ts">
 import { computed } from "vue";
-import { useStore } from "vuex";
+import { storeToRefs } from "pinia";
+import { usePermissionStore } from "@/store/permission";
+import { useSettingStore } from "@/store/setting";
 import { useRoute } from "vue-router";
 import Logo from "./Logo.vue";
 import SlideBarItem from "./Item.vue";
-const store = useStore();
-// 处理路由多层（超过两层）嵌套，缓存失效问题
+/*
+  处理菜单层级问题
+  因为如果路由直接写成三级，页面缓存会无效
+  所以路由只能嵌套两级，这里针对需求组合三级菜单
+*/
+const permissionStore = usePermissionStore(),
+  settingStore = useSettingStore(),
+  route = useRoute();
+const activeMenu = computed(() => route.name?.toString());
+const { isCollapse } = storeToRefs(settingStore);
 function handleRouteNested(routes: any) {
   routes.forEach((list: any) => {
     // 如果是多层嵌套路由
@@ -55,9 +65,7 @@ function handleRouteNested(routes: any) {
   });
   return routes;
 }
-const routes = handleRouteNested(store.getters.routes);
-const activeMenu = computed(() => useRoute().name);
-const isCollapse = computed(() => useStore().getters.isCollapse);
+const routes = handleRouteNested(permissionStore.routes);
 </script>
 <style lang="scss" scoped>
 .el-aside {
