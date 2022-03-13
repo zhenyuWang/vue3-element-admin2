@@ -1,6 +1,7 @@
 import store from "@/store";
 import axios from "axios";
-import { Message } from "element3";
+import { ElMessage } from "element-plus";
+import type { Method } from "@/types/request";
 // 创建axios实例
 // vite环境变量直接使用jest测试报错，所以绑定到window上
 const service = axios.create({
@@ -23,13 +24,13 @@ service.interceptors.response.use(
   (response) => {
     const res = response.data;
     if (res.header.code !== 0) {
-      Message.error(res.header.msg || "Error");
+      ElMessage.error(res.header.msg || "Error");
       return Promise.reject(new Error(res.header.msg || "Error"));
     }
     return res;
   },
   (error) => {
-    Message.error("错了哦，这是一条错误消息");
+    ElMessage.error("错了哦，这是一条错误消息");
     return Promise.reject(error);
   }
 );
@@ -39,27 +40,6 @@ service.interceptors.response.use(
  * @param method 接口请求方式
  * @param data data下请求数据体
  */
-type Method =
-  | "get"
-  | "GET"
-  | "delete"
-  | "DELETE"
-  | "head"
-  | "HEAD"
-  | "options"
-  | "OPTIONS"
-  | "post"
-  | "POST"
-  | "put"
-  | "PUT"
-  | "patch"
-  | "PATCH"
-  | "purge"
-  | "PURGE"
-  | "link"
-  | "LINK"
-  | "unlink"
-  | "UNLINK";
 const request = (
   url: string,
   method: Method,

@@ -5,25 +5,30 @@
   >
     <!-- 中间盒子 -->
     <div class="content">
-      <h3 class="t_center c_fff">登录</h3>
+      <div class="title t_center c_fff">登录</div>
       <el-form ref="form" :model="param" :rules="rules">
         <el-form-item prop="name">
-          <el-input
-            v-model="param.name"
-            prefix-icon="el-icon-user"
-            placeholder="账号"
-          ></el-input>
+          <el-input v-model="param.name" placeholder="账号">
+            <template #prefix>
+              <el-icon class="el-input__icon"><user /></el-icon>
+            </template>
+          </el-input>
         </el-form-item>
         <el-form-item prop="password">
           <el-input
             v-model="param.password"
-            prefix-icon="el-icon-lock"
             placeholder="密码"
             show-password
             autocomplete
-          ></el-input>
+          >
+            <template #prefix>
+              <el-icon class="el-input__icon"><lock /></el-icon>
+            </template>
+          </el-input>
         </el-form-item>
-        <el-button class="w_100" type="primary" @click="login">登录</el-button>
+        <el-button class="w_100" size="large" type="primary" @click="login"
+          >登录</el-button
+        >
       </el-form>
     </div>
   </div>
@@ -81,10 +86,10 @@ const login = () => {
   .content {
     width: 460px;
     margin-top: 200px;
-    h3 {
+    title {
       font-size: 30px;
     }
-    .el-form {
+    :deep(.el-form) {
       padding-top: 30px;
       .el-form-item {
         padding-left: 10px;
@@ -94,9 +99,13 @@ const login = () => {
         .el-input {
           padding-right: 20px;
           display: inline-block;
-          :deep(input) {
+          &::-webkit-scrollbar-corner {
+            background-color: transparent;
+          }
+          input.el-input__inner {
             height: 50px;
             font-size: 16px;
+            box-shadow: none;
             background-color: transparent;
             border: none;
             color: #fff;

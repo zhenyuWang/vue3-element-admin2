@@ -2,7 +2,7 @@ import Layout from "@/layout/index.vue";
 export default {
   path: "/nest-route",
   name: "NestRoute",
-  meta: { title: "多级嵌套", icon: "el-icon-s-grid" },
+  meta: { title: "多级嵌套", icon: "Menu" },
   component: Layout,
   children: [
     {

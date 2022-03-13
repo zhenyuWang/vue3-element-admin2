@@ -3,10 +3,12 @@
     <span class="el-dropdown-link">
       <el-avatar shape="square" :size="36" :src="avatar"></el-avatar>
     </span>
-    <el-dropdown-menu>
-      <el-dropdown-item @click="goUserInfo">个人中心</el-dropdown-item>
-      <el-dropdown-item @click="signout">退出登录</el-dropdown-item>
-    </el-dropdown-menu>
+    <template #dropdown>
+      <el-dropdown-menu>
+        <el-dropdown-item @click="goUserInfo">个人中心</el-dropdown-item>
+        <el-dropdown-item @click="signout">退出登录</el-dropdown-item>
+      </el-dropdown-menu>
+    </template>
   </el-dropdown>
 </template>
 <script setup lang="ts">

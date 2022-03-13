@@ -79,13 +79,13 @@ const isCollapse = computed(() => useStore().getters.isCollapse);
       }
     }
     // 一级菜单样式
-    .el-submenu {
+    .el-sub-menu {
       &.is-active {
-        .el-submenu__title {
+        .el-sub-menu__title {
           background-color: #2c67d3;
         }
       }
-      .el-submenu__title {
+      .el-sub-menu__title {
         color: #fff;
         i {
           color: #fff;
@@ -100,13 +100,13 @@ const isCollapse = computed(() => useStore().getters.isCollapse);
       &.is-active,
       &:hover {
         background-color: #fff;
-        .el-submenu__title,
+        .el-sub-menu__title,
         a,
         i {
           color: #3477f2;
         }
       }
-      .el-submenu__title,
+      .el-sub-menu__title,
       a,
       i {
         color: #fff;

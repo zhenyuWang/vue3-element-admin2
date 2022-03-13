@@ -1,6 +1,12 @@
 <template>
   <div>
-    <el-table :data="list.data" highlight-current-row border stripe>
+    <el-table
+      v-loading="loading"
+      :data="list.data"
+      highlight-current-row
+      border
+      stripe
+    >
       <el-table-column label="序号" align="center" width="80" type="index">
       </el-table-column>
       <el-table-column label="姓名" align="center" width="100" prop="name" />
@@ -8,13 +14,13 @@
       <el-table-column label="操作" align="center">
         <template #default="scope">
           <el-button
-            size="mini"
+            size="small"
             type="primary"
             @click="handleEdit(scope.row.id)"
             >编辑</el-button
           >
           <el-button
-            size="mini"
+            size="small"
             type="danger"
             @click="handleDelete(scope.row.id)"
             >删除</el-button
@@ -31,29 +37,27 @@ export default {
 };
 </script>
 <script setup lang="ts">
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import { apiList1 } from "@/api/table";
-import { ElLoading } from "element3";
 const router = useRouter();
 const list = reactive({
   data: [],
 });
-const param = reactive({
+const params = reactive({
   pageNo: 1,
   pageSize: 10,
 });
+const loading = ref(false);
 const getList = () => {
-  const loading = ElLoading.service({
-    fullscreen: false,
-    target: ".el-table__body-wrapper",
-    text: "Loading...",
-    spinner: "el-icon-loading",
-  });
-  apiList1(param).then((res: any) => {
-    list.data = res.body.data;
-    loading.close();
-  });
+  loading.value = true;
+  apiList1(params)
+    .then((res: any) => {
+      list.data = res.body.data;
+    })
+    .finally(() => {
+      loading.value = false;
+    });
 };
 getList();
 const handleEdit = (id: string) => {

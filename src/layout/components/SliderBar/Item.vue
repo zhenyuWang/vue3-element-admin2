@@ -14,19 +14,23 @@
           "
         />
       </template>
-      <el-submenu v-else :index="item.name">
+      <el-sub-menu v-else :index="item.name">
         <template #title>
-          <i v-if="item.meta && item.meta.icon" :class="item.meta.icon"></i>
+          <el-icon v-if="item.meta && item.meta.icon" :size="14">
+            <component :is="item.meta.icon" />
+          </el-icon>
           <span>{{ (item.meta && item.meta.title) || item.name }}</span>
         </template>
         <template v-for="child in item.children" :key="child.name">
           <SliderBarItem :item="child" />
         </template>
-      </el-submenu>
+      </el-sub-menu>
     </template>
     <el-menu-item v-else :index="item.name">
       <router-link :to="item">
-        <i v-if="item.meta && item.meta.icon" :class="item.meta.icon"></i>
+        <el-icon v-if="item.meta && item.meta.icon" :size="14">
+          <component :is="item.meta.icon" />
+        </el-icon>
         <span>{{ (item.meta && item.meta.title) || item.name }}</span>
       </router-link>
     </el-menu-item>

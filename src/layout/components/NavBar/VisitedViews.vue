@@ -8,11 +8,12 @@
         @contextmenu.prevent="mouseRightClick(view, $event)"
       >
         {{ view.meta.title }}
-        <i
+        <el-icon
           v-if="view.meta && !view.meta.fixed"
-          class="el-icon-error"
+          :size="14"
           @click.stop="delTargetVisited(view.name)"
-        ></i>
+          ><Close
+        /></el-icon>
       </div>
     </template>
     <ul
@@ -135,6 +136,10 @@ const visitedViews = computed(() => useStore().getters.visitedViews);
       background-color: rgb(19, 107, 19);
       border: none;
       color: #fff;
+    }
+    .el-icon {
+      margin-left: 4px;
+      vertical-align: -3px;
     }
   }
   .menu {

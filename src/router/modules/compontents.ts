@@ -2,7 +2,7 @@ import Layout from "@/layout/index.vue";
 export default {
   path: "/compontents",
   name: "Components",
-  meta: { title: "组件", icon: "el-icon-s-data" },
+  meta: { title: "组件", icon: "Menu" },
   redirect: "/compontents/tinymce",
   component: Layout,
   children: [

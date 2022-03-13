@@ -2,7 +2,7 @@ import Layout from "@/layout/index.vue";
 export default {
   path: "/table",
   name: "Table",
-  meta: { title: "表格", icon: "el-icon-s-data" },
+  meta: { title: "表格", icon: "Menu" },
   redirect: "/table/child/list1",
   component: Layout,
   children: [

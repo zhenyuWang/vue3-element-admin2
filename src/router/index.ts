@@ -54,7 +54,7 @@ export const permissionRoutes = [
         name: "Home",
         meta: {
           title: "首页",
-          icon: "el-icon-s-home",
+          icon: "HomeFilled",
           needCache: true,
           fixed: true,
         },
