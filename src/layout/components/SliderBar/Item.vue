@@ -27,12 +27,14 @@
       </el-sub-menu>
     </template>
     <el-menu-item v-else :index="item.name">
-      <router-link :to="item">
-        <el-icon v-if="item.meta && item.meta.icon" :size="14">
-          <component :is="item.meta.icon" />
-        </el-icon>
-        <span>{{ (item.meta && item.meta.title) || item.name }}</span>
-      </router-link>
+      <el-icon v-if="item.meta && item.meta.icon" :size="14">
+        <component :is="item.meta.icon" />
+      </el-icon>
+      <template #title>
+        <router-link :to="item">
+          <span>{{ (item.meta && item.meta.title) || item.name }}</span>
+        </router-link>
+      </template>
     </el-menu-item>
   </template>
 </template>
