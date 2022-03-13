@@ -3,7 +3,13 @@ import { useUserStore } from "@/store/user";
 import { useTagsViewStore } from "@/store/tagsView";
 
 /* Layout */
-import Layout from "@/layout/index.vue";
+// import Layout from "@/layout/index.vue";
+// Vue received a Component which was made a reactive object.
+// This can lead to unnecessary performance overhead,
+// and should be avoided by marking the component with `markRaw` or using `shallowRef` instead of `ref`.
+// 为了修复以上 warn 改为以下写法
+const Layout = () => import("@/layout/index.vue");
+
 // modules
 import table from "./modules/table";
 import nestRoute from "./modules/nestRoute";

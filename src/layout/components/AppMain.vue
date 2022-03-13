@@ -29,7 +29,7 @@ import NavBar from "./NavBar/index.vue";
 const tagsViewStore = useTagsViewStore();
 const { cachedViews } = storeToRefs(tagsViewStore);
 const route = useRoute();
-const key = computed(() => route.name);
+const key = computed(() => route.fullPath);
 </script>
 <style lang="scss" scoped>
 .app_main {

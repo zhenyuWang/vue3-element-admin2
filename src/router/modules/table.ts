@@ -1,4 +1,4 @@
-import Layout from "@/layout/index.vue";
+const Layout = () => import("@/layout/index.vue");
 export default {
   path: "/table",
   name: "Table",
