@@ -66,7 +66,7 @@ const getList = (pageNo?: number) => {
 onMounted(() => {
   getList();
 });
-const handleDelete = (item: any) => {
+const handleDelete = (item: { id: string }) => {
   console.log(`del ${item.id}`);
 };
 const getIndex = (index: number) => {

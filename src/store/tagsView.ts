@@ -1,12 +1,9 @@
 import { defineStore } from "pinia";
-interface State {
-  cachedViews: string[];
-  fixedVisitedViews: any[];
-  visitedViews: any[];
-}
+import { TagViewState } from "@/types/tagsViewStore";
+import type { _RouteRecordBase, RouteRecordName } from "vue-router";
 
 export const useTagsViewStore = defineStore("tagsView", {
-  state: (): State => ({
+  state: (): TagViewState => ({
     // 缓存路由
     cachedViews: [],
     // 固定tabbar的路由
@@ -20,8 +17,9 @@ export const useTagsViewStore = defineStore("tagsView", {
       if (!this.cachedViews.includes(name)) this.cachedViews.push(name);
     },
     // 删除缓存路由
-    deleteCacheView(name: string) {
-      const index = this.cachedViews.indexOf(name);
+    deleteCacheView(name: RouteRecordName | undefined) {
+      if (!name) return;
+      const index = this.cachedViews.indexOf(name.toString());
       if (index > -1) this.cachedViews.splice(index, 1);
     },
     // 清空缓存路由
@@ -29,7 +27,7 @@ export const useTagsViewStore = defineStore("tagsView", {
       this.cachedViews = [];
     },
     // 添加固定路由
-    addFixedVisitedView(view: any) {
+    addFixedVisitedView(view: _RouteRecordBase) {
       if (!this.fixedVisitedViews.find((item) => item.name === view.name))
         this.fixedVisitedViews.push(view);
     },
@@ -38,12 +36,13 @@ export const useTagsViewStore = defineStore("tagsView", {
       this.fixedVisitedViews = [];
     },
     // 添加访问过的路由
-    addVisitedView(view: any) {
+    addVisitedView(view: _RouteRecordBase) {
       if (!this.visitedViews.find((item) => item.name === view.name))
         this.visitedViews.push(view);
     },
     // 删除访问过的路由
-    deleteVisitedView(name: string) {
+    deleteVisitedView(name: RouteRecordName | undefined) {
+      if (!name) return;
       let ind;
       for (let i = 0; i < this.visitedViews.length; i++) {
         if (this.visitedViews[i].name === name) {
@@ -54,7 +53,7 @@ export const useTagsViewStore = defineStore("tagsView", {
       if (ind !== undefined) this.visitedViews.splice(ind, 1);
     },
     // 删除其他访问过的路由
-    deleteOtherVisitedView(view: any) {
+    deleteOtherVisitedView(view: _RouteRecordBase) {
       this.visitedViews = [...this.fixedVisitedViews];
       if (view.meta && !view.meta.fixed) this.visitedViews.push(view);
     },
@@ -63,12 +62,12 @@ export const useTagsViewStore = defineStore("tagsView", {
       this.visitedViews = [...this.fixedVisitedViews];
     },
     // 添加固定路由
-    handleAddFixedVisitedView(view: any) {
+    handleAddFixedVisitedView(view: _RouteRecordBase) {
       this.addFixedVisitedView(view);
       this.addVisitedView(view);
     },
     // 删除访问过的路由
-    handleDeleteVisitedView(name: string) {
+    handleDeleteVisitedView(name: RouteRecordName | undefined) {
       this.deleteCacheView(name);
       this.deleteVisitedView(name);
     },

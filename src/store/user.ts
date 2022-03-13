@@ -2,21 +2,11 @@ import { defineStore } from "pinia";
 import { apiLogin, apiSignout } from "@/api/user";
 import { usePermissionStore } from "./permission";
 import { useTagsViewStore } from "./tagsView";
-interface State {
-  userInfo: {
-    name: string;
-    token: string;
-    avatar: string;
-    roles: string[];
-  };
-}
-type loginData = {
-  name: string;
-  password: string;
-};
+import { UserStoreState, LoginData } from "@/types/userStore";
+import type { Router } from "vue-router";
 
 export const useUserStore = defineStore("user", {
-  state: (): State => ({
+  state: (): UserStoreState => ({
     userInfo: {
       name: "",
       token: "",
@@ -26,7 +16,7 @@ export const useUserStore = defineStore("user", {
   }),
   actions: {
     // 登录
-    login(data: loginData) {
+    login(data: LoginData) {
       return new Promise((resolve, reject) => {
         apiLogin(data)
           .then(async (res) => {
@@ -44,7 +34,7 @@ export const useUserStore = defineStore("user", {
       });
     },
     // 退出登录
-    logout(router: any) {
+    logout(router: Router) {
       apiSignout().then(async () => {
         this.userInfo.name = "";
         this.userInfo.token = "";

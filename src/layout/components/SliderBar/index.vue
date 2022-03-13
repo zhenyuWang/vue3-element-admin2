@@ -16,6 +16,8 @@ import { useSettingStore } from "@/store/setting";
 import { useRoute } from "vue-router";
 import Logo from "./Logo.vue";
 import SlideBarItem from "./Item.vue";
+import type { _RouteRecordBase } from "vue-router";
+
 /*
   处理菜单层级问题
   因为如果路由直接写成三级，页面缓存会无效
@@ -26,25 +28,25 @@ const permissionStore = usePermissionStore(),
   route = useRoute();
 const activeMenu = computed(() => route.name?.toString());
 const { isCollapse } = storeToRefs(settingStore);
-function handleRouteNested(routes: any) {
-  routes.forEach((list: any) => {
+function handleRouteNested(routes: _RouteRecordBase[]): _RouteRecordBase[] {
+  routes.forEach((item: any) => {
     // 如果是多层嵌套路由
-    if (list.name === "NestRoute") {
+    if (item.name === "NestRoute" && item.children && item.children.length) {
       const child1Children = [],
         child2Children = [];
-      for (let i = 0; i < list.children.length; i++) {
-        if (list.children[i].parentName) {
-          if (list.children[i].parentName === "Child1") {
-            child1Children.push(...list.children.splice(i, 1));
+      for (let i = 0; i < item.children.length; i++) {
+        if (item.children[i].parentName) {
+          if (item.children[i].parentName === "Child1") {
+            child1Children.push(...item.children.splice(i, 1));
             i--;
-          } else if (list.children[i].parentName === "Child2") {
-            child2Children.push(...list.children.splice(i, 1));
+          } else if (item.children[i].parentName === "Child2") {
+            child2Children.push(...item.children.splice(i, 1));
             i--;
           }
         }
       }
       if (child2Children.length) {
-        list.children.unshift({
+        item.children.unshift({
           path: "child2",
           name: "Child2",
           meta: { title: "子级2", needCache: true },
@@ -53,7 +55,7 @@ function handleRouteNested(routes: any) {
         });
       }
       if (child1Children.length) {
-        list.children.unshift({
+        item.children.unshift({
           path: "child1",
           name: "Child1",
           meta: { title: "子级1", needCache: true },

@@ -1,9 +1,7 @@
 import { defineStore } from "pinia";
-interface State {
-  isCollapse: boolean;
-}
+import { SettingState } from "@/types/settingStore";
 export const useSettingStore = defineStore("setting", {
-  state: (): State => ({
+  state: (): SettingState => ({
     // 左侧菜单是否展开
     isCollapse: false,
   }),

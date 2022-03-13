@@ -1,4 +1,9 @@
-import { createRouter, createWebHashHistory } from "vue-router";
+import {
+  createRouter,
+  createWebHashHistory,
+  RouteLocationNormalized,
+  _RouteRecordBase,
+} from "vue-router";
 import { useUserStore } from "@/store/user";
 import { useTagsViewStore } from "@/store/tagsView";
 
@@ -111,21 +116,22 @@ router.beforeEach((to) => {
   }
 });
 // 路由后置守卫
-router.afterEach((to: any) => {
+router.afterEach((to: RouteLocationNormalized): void => {
   const tagsViewStore = useTagsViewStore();
   // 添加路由缓存
   if (to.name && to.meta && to.meta.needCache) {
-    tagsViewStore.addCacheView(to.name);
+    tagsViewStore.addCacheView(to.name.toString());
   }
-  const { name, meta, params, query } = to;
+  const { name, path, meta, params, query } = to;
   // 添加访问过路由
   if (to.meta && !to.meta.notNeedAuth) {
     tagsViewStore.addVisitedView({
       name,
+      path,
       meta,
       params,
       query,
-    });
+    } as _RouteRecordBase);
   }
 });
 

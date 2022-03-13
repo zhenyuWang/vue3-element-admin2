@@ -7,7 +7,7 @@
         @click="goTargetView(view)"
         @contextmenu.prevent="mouseRightClick(view, $event)"
       >
-        {{ view.meta.title }}
+        {{ view.meta?.title }}
         <el-icon
           v-if="view.meta && !view.meta.fixed"
           :size="14"
@@ -23,7 +23,7 @@
     >
       <li @click="refresh">刷新</li>
       <li
-        v-if="mouseRightView.data.meta && !mouseRightView.data.meta.fixed"
+        v-if="mouseRightView.meta && !mouseRightView.meta.fixed"
         @click="close"
       >
         关闭
@@ -34,10 +34,11 @@
   </div>
 </template>
 <script setup lang="ts">
-import { reactive, ref, computed } from "vue";
+import { ref, computed, Ref, VueElement } from "vue";
 import { storeToRefs } from "pinia";
 import { useTagsViewStore } from "@/store/tagsView";
 import { useRoute, useRouter } from "vue-router";
+import type { _RouteRecordBase, RouteRecordName } from "vue-router";
 const router = useRouter();
 const route = useRoute();
 const tagsViewStore = useTagsViewStore();
@@ -46,11 +47,11 @@ const currentRouteName = computed(() => route.name);
 // 获取已访问路由
 const { visitedViews } = storeToRefs(tagsViewStore);
 // 跳转目标路由
-const goTargetView = (view: any) => {
+const goTargetView = (view: _RouteRecordBase) => {
   router.push(view);
 };
 // 删除已访问路由
-const delTargetVisited = (name: string) => {
+const delTargetVisited = (name: RouteRecordName | undefined) => {
   tagsViewStore.deleteVisitedView(name);
   // 如果删除的是active路由，跳转访问路由最后一个
   if (name === route.name) {
@@ -60,11 +61,15 @@ const delTargetVisited = (name: string) => {
   }
 };
 // 当前右键view
-const mouseRightView = reactive({
-  data: { name: "", meta: { fixed: "" } },
+const mouseRightView: Ref<_RouteRecordBase> = ref({
+  name: "",
+  path: "",
+  meta: {
+    fixed: false,
+  },
 });
 // 右键菜单html
-const menu = ref<any>();
+const menu: Ref<VueElement | null> = ref(null);
 // 右键菜单是否显示
 const visible = ref(false);
 // 关闭右键菜单
@@ -76,35 +81,37 @@ const showMenu = (left: number, top: number) => {
   // 浏览器添加click关闭右键菜单
   window.addEventListener("click", hideMenu);
   visible.value = true;
-  menu.value.style.left = `${left}px`;
-  menu.value.style.top = `${top + 10}px`;
+  if (menu.value) {
+    menu.value.style.left = `${left}px`;
+    menu.value.style.top = `${top + 10}px`;
+  }
 };
 // 鼠标右键点击
-const mouseRightClick = (view: any, e: any) => {
+const mouseRightClick = (view: _RouteRecordBase, e: any) => {
   // 存储右键view
-  mouseRightView.data = view;
+  mouseRightView.value = view;
   // 显示右键菜单
   showMenu(e.clientX, e.clientY);
 };
 // 刷新右键路由
 const refresh = async () => {
-  tagsViewStore.deleteCacheView(mouseRightView.data.name);
-  if (mouseRightView.data.name === route.name) {
+  tagsViewStore.deleteCacheView(mouseRightView.value.name);
+  if (mouseRightView.value.name === route.name) {
     await router.push({ name: "Home" });
-    router.replace({ name: mouseRightView.data.name });
+    router.replace({ name: mouseRightView.value.name });
   } else {
-    router.push({ name: mouseRightView.data.name });
+    router.push({ name: mouseRightView.value.name });
   }
 };
 // 关闭右键路由
 const close = () => {
-  delTargetVisited(mouseRightView.data.name);
+  delTargetVisited(mouseRightView.value.name);
 };
 // 右键关闭其他
 const closeOther = () => {
-  tagsViewStore.deleteOtherVisitedView(mouseRightView.data);
-  if (mouseRightView.data.name !== route.name) {
-    router.push({ name: mouseRightView.data.name });
+  tagsViewStore.deleteOtherVisitedView(mouseRightView.value);
+  if (mouseRightView.value.name !== route.name) {
+    router.push({ name: mouseRightView.value.name });
   }
 };
 // 右键关闭所有

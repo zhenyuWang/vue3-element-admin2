@@ -1,12 +1,14 @@
 import { defineStore } from "pinia";
 import router, { permissionRoutes } from "@/router";
 import { useTagsViewStore } from "./tagsView";
-type Routes = any[];
-type State = {
-  routes: Routes;
-};
+import type { _RouteRecordBase, RouteRecordRaw } from "vue-router";
+import type { PermissionState } from "@/types/permissionStore";
+import type { StoreGeneric } from "pinia";
 // 将访问过的路由固定到visited views bar
-function handleFixedVisitedViews(tagsViewStore: any, routes: any[]) {
+function handleFixedVisitedViews(
+  tagsViewStore: StoreGeneric,
+  routes: _RouteRecordBase[]
+) {
   routes.forEach((route) => {
     if (route.meta && route.meta.fixed) {
       tagsViewStore.handleAddFixedVisitedView(route);
@@ -17,7 +19,7 @@ function handleFixedVisitedViews(tagsViewStore: any, routes: any[]) {
 }
 
 export const usePermissionStore = defineStore("permission", {
-  state: (): State => ({
+  state: (): PermissionState => ({
     routes: [],
   }),
   actions: {
@@ -27,8 +29,8 @@ export const usePermissionStore = defineStore("permission", {
         // 获取用户权限路由树
         this.routes = permissionRoutes;
         // 将权限路由添加到路由实例中
-        this.routes.forEach((item) => {
-          router.addRoute(item);
+        this.routes.forEach((item: _RouteRecordBase) => {
+          router.addRoute(item as RouteRecordRaw);
         });
         // 获取 tagsViewStore
         const tagsViewStore = useTagsViewStore();

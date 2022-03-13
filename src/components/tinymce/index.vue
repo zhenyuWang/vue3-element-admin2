@@ -49,7 +49,7 @@ onMounted(() => {
     // 图片上传三个参数，图片数据，成功时的回调函数，失败时的回调函数
     images_upload_handler: function (
       blobInfo: any,
-      success: any
+      success: (img: string) => void
       // failure: any
     ) {
       // 本地实现上传
