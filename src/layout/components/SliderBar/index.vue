@@ -28,8 +28,9 @@ const permissionStore = usePermissionStore(),
   route = useRoute();
 const activeMenu = computed(() => route.name?.toString());
 const { isCollapse } = storeToRefs(settingStore);
-function handleRouteNested(routes: _RouteRecordBase[]): _RouteRecordBase[] {
-  routes.forEach((item: any) => {
+const { routes } = storeToRefs(permissionStore);
+function handleRouteNested() {
+  routes.value.forEach((item: any) => {
     // 如果是多层嵌套路由
     if (item.name === "NestRoute" && item.children && item.children.length) {
       const child1Children = [],
@@ -65,9 +66,8 @@ function handleRouteNested(routes: _RouteRecordBase[]): _RouteRecordBase[] {
       }
     }
   });
-  return routes;
 }
-const routes = handleRouteNested(permissionStore.routes);
+handleRouteNested();
 </script>
 <style lang="scss" scoped>
 .el-aside {

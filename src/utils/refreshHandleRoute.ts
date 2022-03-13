@@ -3,18 +3,15 @@ import { createApp } from "vue";
 import App from "@/App.vue";
 import { createPinia } from "pinia";
 import { usePermissionStore } from "@/store/permission";
+import { UserStoreState } from "@/types/userStore";
 export default () => {
   return new Promise((resolve) => {
-    type UserStore = {
-      userInfo: {
-        name: string;
-        token: string;
-      };
-    };
-    let userStore: UserStore = {
+    let userStore: UserStoreState = {
       userInfo: {
         name: "",
         token: "",
+        avatar: "",
+        roles: [],
       },
     };
     const userStoreStr = sessionStorage.getItem("user");

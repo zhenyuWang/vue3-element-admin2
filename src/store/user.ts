@@ -35,7 +35,7 @@ export const useUserStore = defineStore("user", {
     },
     // 退出登录
     logout(router: Router) {
-      apiSignout().then(async () => {
+      apiSignout().then(() => {
         this.userInfo.name = "";
         this.userInfo.token = "";
         this.userInfo.avatar = "";

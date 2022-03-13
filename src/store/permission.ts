@@ -27,7 +27,7 @@ export const usePermissionStore = defineStore("permission", {
     handleRoutes() {
       return new Promise((resolve) => {
         // 获取用户权限路由树
-        this.routes = permissionRoutes;
+        this.routes = [...permissionRoutes];
         // 将权限路由添加到路由实例中
         this.routes.forEach((item: _RouteRecordBase) => {
           router.addRoute(item as RouteRecordRaw);
@@ -40,7 +40,7 @@ export const usePermissionStore = defineStore("permission", {
     },
     // 重置路由
     resetRoute() {
-      permissionRoutes.forEach((item) => {
+      this.routes.forEach((item) => {
         if (item.name) router.removeRoute(item.name);
       });
       this.routes = [];
