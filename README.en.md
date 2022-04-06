@@ -4,16 +4,20 @@
 
 #### Description
 
-A background management system based on Vite+Vue3+Vue Router+Pinia+TS+ElementPlus+axios+Jest+Cypress
+A background management system based on `Vite+Vue3+Vue Router+Pinia+TS+ElementPlus+axios+Jest+Cypress`
 
 #### Software Architecture
 
-Vite+Vue3+Vue Router+Pinia+TS+ElementPlus+axios+Jest+Cypress
+`Vite+Vue3+Vue Router+Pinia+TS+ElementPlus+axios+Jest+Cypress`
 
 #### Installation
 
+```shell
 yarn
+```
 
 #### Start service
 
+```shell
 yarn dev
+```
