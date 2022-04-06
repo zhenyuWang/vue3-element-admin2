@@ -1,5 +1,5 @@
-import router from "../index";
+import router from "../index"
 test("router", () => {
-  expect(router).not.toBeNull();
-  expect(router).not.toBeUndefined();
-});
+  expect(router).not.toBeNull()
+  expect(router).not.toBeUndefined()
+})

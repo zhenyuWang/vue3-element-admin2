@@ -15,11 +15,11 @@ export default [
             "https://img0.baidu.com/it/u=1570224879,3082274194&fm=253&fmt=auto&app=120&f=JPEG?w=432&h=288",
           roles: ["admin", "集团管理员"],
         },
-      };
+      }
     },
   },
   {
-    url: `/module/user/signout`,
+    url: `/module/user/signOut`,
     method: "post",
     response: () => {
       return {
@@ -27,7 +27,7 @@ export default [
           code: 0,
           msg: "OK",
         },
-      };
+      }
     },
   },
-];
+]

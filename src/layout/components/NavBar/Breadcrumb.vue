@@ -12,9 +12,9 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed } from "vue";
-import { useRoute } from "vue-router";
-const titleList = computed(() => useRoute().matched);
+import { computed } from "vue"
+import { useRoute } from "vue-router"
+const titleList = computed(() => useRoute().matched)
 </script>
 <style lang="scss" scoped>
 /* breadcrumb transition */

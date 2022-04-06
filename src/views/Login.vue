@@ -1,11 +1,11 @@
 <template>
   <div
-    class="flex flex_justify_center login_box w_100 h_100"
+    class="flex flex-justify-center login_box w-100 h-100"
     @keyup.enter="login"
   >
     <!-- 中间盒子 -->
     <div class="content">
-      <div class="title t_center c_fff">登录</div>
+      <div class="title t-center c-fff">登录</div>
       <el-form ref="form" :model="params" :rules="rules">
         <el-form-item prop="name">
           <el-input v-model="params.name" placeholder="账号">
@@ -26,7 +26,7 @@
             </template>
           </el-input>
         </el-form-item>
-        <el-button class="w_100" size="large" type="primary" @click="login"
+        <el-button class="w-100" size="large" type="primary" @click="login"
           >登录</el-button
         >
       </el-form>
@@ -36,22 +36,22 @@
 <script lang="ts">
 export default {
   name: "Login",
-};
+}
 </script>
 <script setup lang="ts">
-import { ref, reactive } from "vue";
-import { useUserStore } from "@/store/user";
-import { useRouter } from "vue-router";
-const userStore = useUserStore();
+import { ref, reactive } from "vue"
+import { useUserStore } from "@/store/user"
+import { useRouter } from "vue-router"
+const userStore = useUserStore()
 // 路由实例
-const router = useRouter();
+const router = useRouter()
 // 表单
-const form = ref(null);
+const form = ref(null)
 // 请求参数
 const params = reactive({
   name: "",
   password: "",
-});
+})
 // 表单校验规则
 const rules = reactive({
   name: [
@@ -59,23 +59,23 @@ const rules = reactive({
     // { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
   ],
   password: [{ required: true, message: "请输入密码", trigger: "blur" }],
-});
-const passInputType = ref("password");
+})
+const passInputType = ref("password")
 const changeInputType = (val: string) => {
-  passInputType.value = val;
-};
+  passInputType.value = val
+}
 // 登录
 const login = () => {
-  (form as any).value.validate((valid: boolean) => {
+  ;(form as any).value.validate((valid: boolean) => {
     if (valid) {
       userStore.login(params).then(() => {
-        router.push({ name: "Home" });
-      });
+        router.push({ name: "Home" })
+      })
     } else {
-      return false;
+      return false
     }
-  });
-};
+  })
+}
 </script>
 <style lang="scss" scoped>
 .login_box {

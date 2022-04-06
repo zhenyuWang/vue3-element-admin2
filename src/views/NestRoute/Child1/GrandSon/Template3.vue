@@ -5,5 +5,5 @@
 <script lang="ts">
 export default {
   name: "Child1Template3",
-};
+}
 </script>

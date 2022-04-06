@@ -1,6 +1,6 @@
 <template>
-  <div class="navbar flex flex_align_center flex_justify_between border_b">
-    <div class="flex flex_align_center">
+  <div class="navbar flex flex-align-center flex-justify-between border-b">
+    <div class="flex flex-align-center">
       <Collapse />
       <Breadcrumb />
     </div>
@@ -9,10 +9,10 @@
   <VisitedViews />
 </template>
 <script setup lang="ts">
-import Collapse from "./Collapse.vue";
-import Breadcrumb from "./Breadcrumb.vue";
-import AvatarDropDown from "./AvatarDropDown.vue";
-import VisitedViews from "./VisitedViews.vue";
+import Collapse from "./Collapse.vue"
+import Breadcrumb from "./Breadcrumb.vue"
+import AvatarDropDown from "./AvatarDropDown.vue"
+import VisitedViews from "./VisitedViews.vue"
 </script>
 <style lang="scss" scoped>
 .navbar {

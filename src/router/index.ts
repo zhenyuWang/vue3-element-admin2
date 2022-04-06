@@ -3,9 +3,9 @@ import {
   createWebHashHistory,
   RouteLocationNormalized,
   _RouteRecordBase,
-} from "vue-router";
-import { useUserStore } from "@/store/user";
-import { useTagsViewStore } from "@/store/tagsView";
+} from "vue-router"
+import { useUserStore } from "@/store/user"
+import { useTagsViewStore } from "@/store/tagsView"
 
 /* Layout */
 // import Layout from "@/layout/index.vue";
@@ -13,13 +13,13 @@ import { useTagsViewStore } from "@/store/tagsView";
 // This can lead to unnecessary performance overhead,
 // and should be avoided by marking the component with `markRaw` or using `shallowRef` instead of `ref`.
 // 为了修复以上 warn 改为以下写法
-const Layout = () => import("@/layout/index.vue");
+const Layout = () => import("@/layout/index.vue")
 
 // modules
-import table from "./modules/table";
-import nestRoute from "./modules/nestRoute";
-import compontents from "./modules/compontents";
-import user from "./modules/user";
+import table from "./modules/table"
+import nestRoute from "./modules/nestRoute"
+import compontents from "./modules/compontents"
+import user from "./modules/user"
 
 /*
   config
@@ -52,7 +52,7 @@ export const routes = [
     meta: { notNeedAuth: true },
     component: () => import("@/views/404.vue"),
   },
-];
+]
 // 需要校验权限的路由
 export const permissionRoutes = [
   {
@@ -83,7 +83,7 @@ export const permissionRoutes = [
     hidden: true,
     redirect: "/404",
   },
-];
+]
 
 // 路由实例
 const router = createRouter({
@@ -91,9 +91,9 @@ const router = createRouter({
   routes,
   // 始终滚动到顶部
   scrollBehavior() {
-    return { top: 0 };
+    return { top: 0 }
   },
-});
+})
 
 // 路由前置守卫
 router.beforeEach((to) => {
@@ -107,22 +107,22 @@ router.beforeEach((to) => {
   // 如果to需要鉴权
   if (!to.meta.notNeedAuth) {
     // 获取userInfo
-    const userStore = useUserStore();
-    const userInfo = userStore.userInfo;
+    const userStore = useUserStore()
+    const userInfo = userStore.userInfo
     // 如果未登录
     if (!userInfo.name || !userInfo.token) {
-      return { name: "Login" };
+      return { name: "Login" }
     }
   }
-});
+})
 // 路由后置守卫
 router.afterEach((to: RouteLocationNormalized): void => {
-  const tagsViewStore = useTagsViewStore();
+  const tagsViewStore = useTagsViewStore()
   // 添加路由缓存
   if (to.name && to.meta && to.meta.needCache) {
-    tagsViewStore.addCacheView(to.name.toString());
+    tagsViewStore.addCacheView(to.name.toString())
   }
-  const { name, path, meta, params, query } = to;
+  const { name, path, meta, params, query } = to
   // 添加访问过路由
   if (to.meta && !to.meta.notNeedAuth) {
     tagsViewStore.addVisitedView({
@@ -131,8 +131,8 @@ router.afterEach((to: RouteLocationNormalized): void => {
       meta,
       params,
       query,
-    } as _RouteRecordBase);
+    } as _RouteRecordBase)
   }
-});
+})
 
-export default router;
+export default router

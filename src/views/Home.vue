@@ -1,5 +1,5 @@
 <template>
-  <div class="box t_center">
+  <div class="box t-center">
     <img src="@/assets/img/snail.png" alt="" />
     <hello-world
       msg="Vite2 + Vue3 + Pinia + ElementPlus + TS + jest + cypress buy running snail!"
@@ -7,10 +7,10 @@
   </div>
 </template>
 <script lang="ts">
-"Home";
+"Home"
 </script>
 <script setup lang="ts">
-import HelloWorld from "@/components/HelloWorld.vue";
+import HelloWorld from "@/components/HelloWorld.vue"
 </script>
 <style lang="scss" scoped>
 .box {

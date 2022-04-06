@@ -1,4 +1,4 @@
-const Layout = () => import("@/layout/index.vue");
+const Layout = () => import("@/layout/index.vue")
 export default {
   path: "/table",
   name: "Table",
@@ -27,4 +27,4 @@ export default {
       component: () => import("@/views/Table/List2/index.vue"),
     },
   ],
-};
+}

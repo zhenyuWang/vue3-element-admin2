@@ -1,4 +1,4 @@
 interface Window {
-  mode: string;
-  baseUrl: string;
+  mode: string
+  baseUrl: string
 }

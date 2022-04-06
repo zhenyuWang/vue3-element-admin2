@@ -4,10 +4,10 @@ module.exports = {
       return {
         visitor: {
           MetaProperty(path) {
-            path.replaceWithSourceString("process");
+            path.replaceWithSourceString("process")
           },
         },
-      };
+      }
     },
   ],
   presets: [
@@ -17,4 +17,4 @@ module.exports = {
     ],
     "@babel/preset-typescript",
   ],
-};
+}

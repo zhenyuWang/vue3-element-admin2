@@ -1,1 +1,1 @@
-declare module "@vue/test-utils";
+declare module "@vue/test-utils"

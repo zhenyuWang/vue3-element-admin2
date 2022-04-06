@@ -37,39 +37,39 @@
 <script lang="ts">
 export default {
   name: "TableChildList2",
-};
+}
 </script>
 <script setup lang="ts">
-import { reactive, ref, onMounted } from "vue";
-import { apiList2 } from "@/api/table";
+import { reactive, ref, onMounted } from "vue"
+import { apiList2 } from "@/api/table"
 const list = reactive({
   data: [],
-});
+})
 const params = reactive({
   pageNo: 1,
   pageSize: 10,
-});
-const totalCount = ref(0);
-const loading = ref(false);
+})
+const totalCount = ref(0)
+const loading = ref(false)
 const getList = (pageNo?: number) => {
-  loading.value = true;
-  if (pageNo) params.pageNo = pageNo;
+  loading.value = true
+  if (pageNo) params.pageNo = pageNo
   apiList2(params)
     .then((res: any) => {
-      list.data = res.body.data;
-      totalCount.value = res.body.totalCount;
+      list.data = res.body.data
+      totalCount.value = res.body.totalCount
     })
     .finally(() => {
-      loading.value = false;
-    });
-};
+      loading.value = false
+    })
+}
 onMounted(() => {
-  getList();
-});
+  getList()
+})
 const handleDelete = (item: { id: string }) => {
-  console.log(`del ${item.id}`);
-};
+  console.log(`del ${item.id}`)
+}
 const getIndex = (index: number) => {
-  return (params.pageNo - 1) * params.pageSize + index + 1;
-};
+  return (params.pageNo - 1) * params.pageSize + index + 1
+}
 </script>

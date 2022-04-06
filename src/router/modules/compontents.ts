@@ -1,4 +1,4 @@
-const Layout = () => import("@/layout/index.vue");
+const Layout = () => import("@/layout/index.vue")
 export default {
   path: "/compontents",
   name: "Components",
@@ -13,4 +13,4 @@ export default {
       component: () => import("@/views/Component/Tinymce.vue"),
     },
   ],
-};
+}

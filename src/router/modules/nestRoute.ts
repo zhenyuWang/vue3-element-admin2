@@ -1,4 +1,4 @@
-const Layout = () => import("@/layout/index.vue");
+const Layout = () => import("@/layout/index.vue")
 export default {
   path: "/nest-route",
   name: "NestRoute",
@@ -54,4 +54,4 @@ export default {
         import("@/views/NestRoute/Child2/GrandSon/Template3.vue"),
     },
   ],
-};
+}

@@ -1,9 +1,9 @@
-import { UserConfigExport, ConfigEnv, loadEnv } from "vite";
-import vue from "@vitejs/plugin-vue";
-import { resolve } from "path";
-import { viteMockServe } from "vite-plugin-mock";
-import viteImagemin from "vite-plugin-imagemin";
-import compressPlugin from "vite-plugin-compression";
+import { UserConfigExport, ConfigEnv, loadEnv } from "vite"
+import vue from "@vitejs/plugin-vue"
+import { resolve } from "path"
+import { viteMockServe } from "vite-plugin-mock"
+import viteImagemin from "vite-plugin-imagemin"
+import compressPlugin from "vite-plugin-compression"
 
 export default ({ command, mode }: ConfigEnv): UserConfigExport => {
   const plugins = [
@@ -44,8 +44,8 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       algorithm: "gzip",
       deleteOriginFile: true,
     }),
-  ];
-  const env = loadEnv(mode, process.cwd());
+  ]
+  const env = loadEnv(mode, process.cwd())
   // 如果当前是测试环境，使用添加mock插件
   if (mode === "development") {
     plugins.push(
@@ -53,7 +53,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         mockPath: "mock",
         localEnabled: command === "serve",
       })
-    );
+    )
   }
   // 处理使用import.meta.env jest 测试报错问题
   const envWithProcessPrefix = Object.entries(env).reduce(
@@ -62,10 +62,10 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
         ...prev,
         // 环境变量添加process.env
         ["process.env." + key]: `"${val}"`,
-      };
+      }
     },
     {}
-  );
+  )
   return {
     base: "./",
     server: {
@@ -113,7 +113,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
                 .toString()
                 .split("node_modules/")[1]
                 .split("/")[0]
-                .toString();
+                .toString()
             }
           },
         },
@@ -122,5 +122,5 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       chunkSizeWarningLimit: 600,
     },
     define: envWithProcessPrefix,
-  };
-};
+  }
+}

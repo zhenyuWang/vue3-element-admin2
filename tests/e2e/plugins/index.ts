@@ -16,7 +16,7 @@
  * @type {Cypress.PluginConfig}
  */
 // eslint-disable-next-line no-unused-vars
-module.exports = (on, config) => {
+module.exports = (_: any, config: Cypress.PluginConfig) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
   return Object.assign({}, config, {
@@ -25,5 +25,5 @@ module.exports = (on, config) => {
     screenshotsFolder: "tests/e2e/screenshots",
     videosFolder: "tests/e2e/videos",
     supportFile: "tests/e2e/support/index.ts",
-  });
-};
+  })
+}

@@ -2,7 +2,7 @@
   <div class="visited_views">
     <template v-for="view in visitedViews" :key="view.name">
       <div
-        class="fontsize_12 c_666 pointer"
+        class="font-size-12 c-666 pointer"
         :class="{ active: currentRouteName === view.name }"
         @click="goTargetView(view)"
         @contextmenu.prevent="mouseRightClick(view, $event)"
@@ -19,7 +19,7 @@
     <ul
       v-show="visible"
       ref="menu"
-      class="menu bg_fff fontsize_13 pointer c_333"
+      class="menu bg-fff font-size-13 pointer c-333"
     >
       <li @click="refresh">刷新</li>
       <li
@@ -34,32 +34,32 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref, computed, Ref, VueElement } from "vue";
-import { storeToRefs } from "pinia";
-import { useTagsViewStore } from "@/store/tagsView";
-import { useRoute, useRouter } from "vue-router";
-import type { _RouteRecordBase, RouteRecordName } from "vue-router";
-const router = useRouter();
-const route = useRoute();
-const tagsViewStore = useTagsViewStore();
+import { ref, computed, Ref, VueElement } from "vue"
+import { storeToRefs } from "pinia"
+import { useTagsViewStore } from "@/store/tagsView"
+import { useRoute, useRouter } from "vue-router"
+import type { _RouteRecordBase, RouteRecordName } from "vue-router"
+const router = useRouter()
+const route = useRoute()
+const tagsViewStore = useTagsViewStore()
 // 获取当前路由
-const currentRouteName = computed(() => route.name);
+const currentRouteName = computed(() => route.name)
 // 获取已访问路由
-const { visitedViews } = storeToRefs(tagsViewStore);
+const { visitedViews } = storeToRefs(tagsViewStore)
 // 跳转目标路由
 const goTargetView = (view: _RouteRecordBase) => {
-  router.push(view);
-};
+  router.push(view)
+}
 // 删除已访问路由
 const delTargetVisited = (name: RouteRecordName | undefined) => {
-  tagsViewStore.deleteVisitedView(name);
+  tagsViewStore.deleteVisitedView(name)
   // 如果删除的是active路由，跳转访问路由最后一个
   if (name === route.name) {
     router.push({
       name: visitedViews.value[visitedViews.value.length - 1].name,
-    });
+    })
   }
-};
+}
 // 当前右键view
 const mouseRightView: Ref<_RouteRecordBase> = ref({
   name: "",
@@ -67,61 +67,61 @@ const mouseRightView: Ref<_RouteRecordBase> = ref({
   meta: {
     fixed: false,
   },
-});
+})
 // 右键菜单html
-const menu: Ref<VueElement | null> = ref(null);
+const menu: Ref<VueElement | null> = ref(null)
 // 右键菜单是否显示
-const visible = ref(false);
+const visible = ref(false)
 // 关闭右键菜单
 const hideMenu = () => {
-  visible.value = false;
-};
+  visible.value = false
+}
 // 显示右键菜单
 const showMenu = (left: number, top: number) => {
   // 浏览器添加click关闭右键菜单
-  window.addEventListener("click", hideMenu);
-  visible.value = true;
+  window.addEventListener("click", hideMenu)
+  visible.value = true
   if (menu.value) {
-    menu.value.style.left = `${left}px`;
-    menu.value.style.top = `${top + 10}px`;
+    menu.value.style.left = `${left}px`
+    menu.value.style.top = `${top + 10}px`
   }
-};
+}
 // 鼠标右键点击
 const mouseRightClick = (view: _RouteRecordBase, e: any) => {
   // 存储右键view
-  mouseRightView.value = view;
+  mouseRightView.value = view
   // 显示右键菜单
-  showMenu(e.clientX, e.clientY);
-};
+  showMenu(e.clientX, e.clientY)
+}
 // 刷新右键路由
 const refresh = async () => {
-  tagsViewStore.deleteCacheView(mouseRightView.value.name);
+  tagsViewStore.deleteCacheView(mouseRightView.value.name)
   if (mouseRightView.value.name === route.name) {
-    await router.push({ name: "Home" });
-    router.replace({ name: mouseRightView.value.name });
+    await router.push({ name: "Home" })
+    router.replace({ name: mouseRightView.value.name })
   } else {
-    router.push({ name: mouseRightView.value.name });
+    router.push({ name: mouseRightView.value.name })
   }
-};
+}
 // 关闭右键路由
 const close = () => {
-  delTargetVisited(mouseRightView.value.name);
-};
+  delTargetVisited(mouseRightView.value.name)
+}
 // 右键关闭其他
 const closeOther = () => {
-  tagsViewStore.deleteOtherVisitedView(mouseRightView.value);
+  tagsViewStore.deleteOtherVisitedView(mouseRightView.value)
   if (mouseRightView.value.name !== route.name) {
-    router.push({ name: mouseRightView.value.name });
+    router.push({ name: mouseRightView.value.name })
   }
-};
+}
 // 右键关闭所有
 const closeAll = async () => {
-  await tagsViewStore.clearCacheView();
-  await tagsViewStore.clearVisitedView();
+  await tagsViewStore.clearCacheView()
+  await tagsViewStore.clearVisitedView()
   router.push({
     name: visitedViews.value[visitedViews.value.length - 1].name,
-  });
-};
+  })
+}
 </script>
 <style lang="scss" scoped>
 .visited_views {

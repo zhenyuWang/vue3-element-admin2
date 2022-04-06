@@ -1,7 +1,7 @@
 <template>
-  <div class="not_fund flex flex_center flex_direction_column">
+  <div class="not_fund flex flex-center flex-direction-column">
     <div class="logo"></div>
-    <p class="pb_20">您访问的页面不存在</p>
+    <p class="pb-20">您访问的页面不存在</p>
     <el-button type="primary" @click="$router.push({ name: 'Home' })"
       >返回首页</el-button
     >
@@ -10,7 +10,7 @@
 <script lang="ts">
 export default {
   name: "NotFund",
-};
+}
 </script>
 <style lang="scss" scoped>
 .not_fund {

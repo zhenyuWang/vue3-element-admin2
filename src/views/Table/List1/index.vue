@@ -34,41 +34,41 @@
 <script lang="ts">
 export default {
   name: "TableChildList1",
-};
+}
 </script>
 <script setup lang="ts">
-import { reactive, ref } from "vue";
-import { useRouter } from "vue-router";
-import { apiList1 } from "@/api/table";
-const router = useRouter();
+import { reactive, ref } from "vue"
+import { useRouter } from "vue-router"
+import { apiList1 } from "@/api/table"
+const router = useRouter()
 const list = reactive({
   data: [],
-});
+})
 const params = reactive({
   pageNo: 1,
   pageSize: 10,
-});
-const loading = ref(false);
+})
+const loading = ref(false)
 const getList = () => {
-  loading.value = true;
+  loading.value = true
   apiList1(params)
     .then((res: any) => {
-      list.data = res.body.data;
+      list.data = res.body.data
     })
     .finally(() => {
-      loading.value = false;
-    });
-};
-getList();
+      loading.value = false
+    })
+}
+getList()
 const handleEdit = (id: string) => {
   router.push({
     name: "TableList1Edit",
     params: {
       id,
     },
-  });
-};
+  })
+}
 const handleDelete = (id: string) => {
-  console.log(`del ${id}`);
-};
+  console.log(`del ${id}`)
+}
 </script>

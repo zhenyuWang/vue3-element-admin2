@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, onMounted, onUnmounted } from "vue";
+import { defineProps, onMounted, onUnmounted } from "vue"
 const props = defineProps({
   id: {
     type: String,
@@ -17,10 +17,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-});
+})
 // tinymce 初始化配置
 onMounted(() => {
-  (window as any).tinymce.init({
+  ;(window as any).tinymce.init({
     selector: `#${props.id}`,
     readonly: props.readonly,
     language_url: "/tinymce/zh_CN.js", //语言包
@@ -53,8 +53,8 @@ onMounted(() => {
       // failure: any
     ) {
       // 本地实现上传
-      const img = "data:image/jpeg;base64," + blobInfo.base64();
-      success(img);
+      const img = "data:image/jpeg;base64," + blobInfo.base64()
+      success(img)
       // let formdata = new FormData();
       // formdata.append("file", blobInfo.blob());
       // // 上传图片接口，跟后端同事协调上传图片
@@ -68,11 +68,11 @@ onMounted(() => {
       //     failure("error");
       //   });
     },
-  });
-});
+  })
+})
 // 组件卸载时清除当前实例，不然再次进入页面会无法实例化
 onUnmounted(() => {
-  const instance = (window as any).tinymce.get(`${props.id}`);
-  if (instance) instance.remove();
-});
+  const instance = (window as any).tinymce.get(`${props.id}`)
+  if (instance) instance.remove()
+})
 </script>

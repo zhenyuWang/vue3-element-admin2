@@ -18,6 +18,8 @@
     "sourceType": "module"
   },
   "rules": {
+    "semi": ["warn", "never"],
+    "prettier/prettier": ["error", { "semi": false }],
     // Enable vue/script-setup-uses-vars rule
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": ["off"],
@@ -34,8 +36,6 @@
     // 要求或禁止在三元操作数中间换行
     "multiline-ternary": "off",
     // 要求或禁止在变量声明周围换行
-    "one-var-declaration-per-line": "off",
-    // 强制操作符使用一致的换行符
-    "operator-linebreak": "off"
+    "one-var-declaration-per-line": "off"
   }
 }

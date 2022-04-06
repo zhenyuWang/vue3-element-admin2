@@ -63,7 +63,7 @@ export default [
           ],
           totalCount: 14,
         },
-      };
+      }
     },
   },
   {
@@ -143,8 +143,8 @@ export default [
           },
         ],
         pageNo = req.body.pageNo,
-        pageSize = req.body.pageSize;
-      const end = pageNo * pageSize;
+        pageSize = req.body.pageSize
+      const end = pageNo * pageSize
       return {
         header: {
           code: 0,
@@ -154,7 +154,7 @@ export default [
           data: data.slice(end - pageSize, end),
           totalCount: data.length,
         },
-      };
+      }
     },
   },
   {
@@ -173,7 +173,7 @@ export default [
             role: "管理员",
           },
         },
-      };
+      }
     },
   },
-];
+]

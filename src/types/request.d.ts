@@ -18,4 +18,4 @@ export type Method =
   | "link"
   | "LINK"
   | "unlink"
-  | "UNLINK";
+  | "UNLINK"

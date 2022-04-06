@@ -9,14 +9,14 @@
   </el-aside>
 </template>
 <script setup lang="ts">
-import { computed } from "vue";
-import { storeToRefs } from "pinia";
-import { usePermissionStore } from "@/store/permission";
-import { useSettingStore } from "@/store/setting";
-import { useRoute } from "vue-router";
-import Logo from "./Logo.vue";
-import SlideBarItem from "./Item.vue";
-import type { _RouteRecordBase } from "vue-router";
+import { computed } from "vue"
+import { storeToRefs } from "pinia"
+import { usePermissionStore } from "@/store/permission"
+import { useSettingStore } from "@/store/setting"
+import { useRoute } from "vue-router"
+import Logo from "./Logo.vue"
+import SlideBarItem from "./Item.vue"
+import type { _RouteRecordBase } from "vue-router"
 
 /*
   处理菜单层级问题
@@ -25,24 +25,24 @@ import type { _RouteRecordBase } from "vue-router";
 */
 const permissionStore = usePermissionStore(),
   settingStore = useSettingStore(),
-  route = useRoute();
-const activeMenu = computed(() => route.name?.toString());
-const { isCollapse } = storeToRefs(settingStore);
-const { routes } = storeToRefs(permissionStore);
+  route = useRoute()
+const activeMenu = computed(() => route.name?.toString())
+const { isCollapse } = storeToRefs(settingStore)
+const { routes } = storeToRefs(permissionStore)
 function handleRouteNested() {
   routes.value.forEach((item: any) => {
     // 如果是多层嵌套路由
     if (item.name === "NestRoute" && item.children && item.children.length) {
       const child1Children = [],
-        child2Children = [];
+        child2Children = []
       for (let i = 0; i < item.children.length; i++) {
         if (item.children[i].parentName) {
           if (item.children[i].parentName === "Child1") {
-            child1Children.push(...item.children.splice(i, 1));
-            i--;
+            child1Children.push(...item.children.splice(i, 1))
+            i--
           } else if (item.children[i].parentName === "Child2") {
-            child2Children.push(...item.children.splice(i, 1));
-            i--;
+            child2Children.push(...item.children.splice(i, 1))
+            i--
           }
         }
       }
@@ -53,7 +53,7 @@ function handleRouteNested() {
           meta: { title: "子级2", needCache: true },
           component: () => import("@/views/NestRoute/Child2/index.vue"),
           children: child2Children,
-        });
+        })
       }
       if (child1Children.length) {
         item.children.unshift({
@@ -62,12 +62,12 @@ function handleRouteNested() {
           meta: { title: "子级1", needCache: true },
           component: () => import("@/views/NestRoute/Child1/index.vue"),
           children: child1Children,
-        });
+        })
       }
     }
-  });
+  })
 }
-handleRouteNested();
+handleRouteNested()
 </script>
 <style lang="scss" scoped>
 .el-aside {
