@@ -24,7 +24,7 @@
     "*": "prettier -w -u"
   },
   "dependencies": {
-    "@element-plus/icons": "^0.0.11",
+    "@element-plus/icons-vue": "^1.1.4",
     "axios": "0.21.1",
     "element-plus": "^2.1.0",
     "mockjs": "1.1.0",

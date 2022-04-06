@@ -1,5 +1,5 @@
 import type { App } from "vue";
-import * as ElIcons from "@element-plus/icons";
+import * as ElIcons from "@element-plus/icons-vue";
 
 export default function setupElIcons(app: App<Element>) {
   for (const name in ElIcons) {
