@@ -13,11 +13,11 @@
 #### 安装
 
 ```shell
-yarn
+pnpm
 ```
 
 #### 启动服务
 
 ```shell
-yarn dev
+pnpm dev
 ```
