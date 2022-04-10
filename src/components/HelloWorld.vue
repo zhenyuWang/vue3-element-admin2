@@ -6,6 +6,7 @@
 
 <script setup lang="ts">
 import { defineProps, ref } from "vue"
+
 defineProps({
   msg: {
     type: String,
@@ -14,6 +15,7 @@ defineProps({
 })
 const count = ref(0)
 </script>
+
 <style lang="scss" scoped>
 p {
   padding: 20px 0;

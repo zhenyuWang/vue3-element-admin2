@@ -7,11 +7,13 @@
     >
   </div>
 </template>
+
 <script lang="ts">
 export default {
   name: "NotFund",
 }
 </script>
+
 <style lang="scss" scoped>
 .not_fund {
   .logo {

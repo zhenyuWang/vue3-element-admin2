@@ -1,8 +1,8 @@
 import axios from "axios"
 import { ElMessage } from "element-plus"
 import type { Method } from "@/types/request"
+
 // 创建axios实例
-// vite环境变量直接使用jest测试报错，所以绑定到window上
 const service = axios.create({
   baseURL: process.env.VITE_BASE_API,
   timeout: 10000,

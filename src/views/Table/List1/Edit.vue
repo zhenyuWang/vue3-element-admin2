@@ -5,9 +5,11 @@
     <div>角色：{{ userInfo.role }}</div>
   </div>
 </template>
+
 <script setup lang="ts">
 import { defineProps, reactive } from "vue"
 import { apiItemInfo } from "@/api/table"
+
 const props = defineProps({
   id: {
     type: String,

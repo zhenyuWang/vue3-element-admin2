@@ -33,12 +33,14 @@
     </ul>
   </div>
 </template>
+
 <script setup lang="ts">
 import { ref, computed, Ref, VueElement } from "vue"
 import { storeToRefs } from "pinia"
 import { useTagsViewStore } from "@/store/tagsView"
 import { useRoute, useRouter } from "vue-router"
 import type { _RouteRecordBase, RouteRecordName } from "vue-router"
+
 const router = useRouter()
 const route = useRoute()
 const tagsViewStore = useTagsViewStore()
@@ -123,6 +125,7 @@ const closeAll = async () => {
   })
 }
 </script>
+
 <style lang="scss" scoped>
 .visited_views {
   height: 30px;

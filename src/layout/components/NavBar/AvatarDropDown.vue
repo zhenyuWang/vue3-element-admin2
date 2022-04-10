@@ -11,17 +11,22 @@
     </template>
   </el-dropdown>
 </template>
+
 <script setup lang="ts">
 import { computed } from "vue"
 import { useUserStore } from "@/store/user"
 import { useRouter } from "vue-router"
+
 const userStore = useUserStore()
 const router = useRouter()
+
 const goUserInfo = () => {
   router.push({ name: "UserInfo" })
 }
+
 const signOut = () => {
   userStore.logout(router)
 }
+
 const avatar = computed(() => userStore.userInfo.avatar)
 </script>

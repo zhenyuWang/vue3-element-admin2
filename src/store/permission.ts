@@ -4,6 +4,7 @@ import { useTagsViewStore } from "./tagsView"
 import type { _RouteRecordBase, RouteRecordRaw } from "vue-router"
 import type { PermissionState } from "@/types/permissionStore"
 import type { StoreGeneric } from "pinia"
+
 // 将访问过的路由固定到visited views bar
 function handleFixedVisitedViews(
   tagsViewStore: StoreGeneric,

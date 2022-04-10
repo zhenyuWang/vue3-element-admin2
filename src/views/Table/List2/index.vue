@@ -34,14 +34,17 @@
     </el-pagination>
   </div>
 </template>
+
 <script lang="ts">
 export default {
   name: "TableChildList2",
 }
 </script>
+
 <script setup lang="ts">
 import { reactive, ref, onMounted } from "vue"
 import { apiList2 } from "@/api/table"
+
 const list = reactive({
   data: [],
 })

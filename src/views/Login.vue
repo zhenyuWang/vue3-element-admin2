@@ -33,38 +33,30 @@
     </div>
   </div>
 </template>
+
 <script lang="ts">
 export default {
   name: "Login",
 }
 </script>
+
 <script setup lang="ts">
 import { ref, reactive } from "vue"
 import { useUserStore } from "@/store/user"
 import { useRouter } from "vue-router"
+
 const userStore = useUserStore()
-// 路由实例
 const router = useRouter()
-// 表单
 const form = ref(null)
-// 请求参数
 const params = reactive({
   name: "",
   password: "",
 })
-// 表单校验规则
 const rules = reactive({
-  name: [
-    { required: true, message: "请输入账号", trigger: "blur" },
-    // { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
-  ],
+  name: [{ required: true, message: "请输入账号", trigger: "blur" }],
   password: [{ required: true, message: "请输入密码", trigger: "blur" }],
 })
-const passInputType = ref("password")
-const changeInputType = (val: string) => {
-  passInputType.value = val
-}
-// 登录
+
 const login = () => {
   ;(form as any).value.validate((valid: boolean) => {
     if (valid) {
@@ -77,6 +69,7 @@ const login = () => {
   })
 }
 </script>
+
 <style lang="scss" scoped>
 .login_box {
   background-color: #2d3a4b;

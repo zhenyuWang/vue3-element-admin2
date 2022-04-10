@@ -8,6 +8,7 @@
     </el-menu>
   </el-aside>
 </template>
+
 <script setup lang="ts">
 import { computed } from "vue"
 import { storeToRefs } from "pinia"
@@ -69,6 +70,7 @@ function handleRouteNested() {
 }
 handleRouteNested()
 </script>
+
 <style lang="scss" scoped>
 .el-aside {
   width: 230px !important;

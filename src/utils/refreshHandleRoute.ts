@@ -4,6 +4,7 @@ import App from "@/App.vue"
 import { createPinia } from "pinia"
 import { usePermissionStore } from "@/store/permission"
 import { UserStoreState } from "@/types/userStore"
+
 export default () => {
   return new Promise((resolve) => {
     let userStore: UserStoreState = {
@@ -15,7 +16,11 @@ export default () => {
       },
     }
     const userStoreStr = sessionStorage.getItem("user")
-    if (userStoreStr) userStore = JSON.parse(userStoreStr)
+
+    if (userStoreStr) {
+      userStore = JSON.parse(userStoreStr)
+    }
+
     // 如果已经登录
     if (
       userStore.userInfo &&

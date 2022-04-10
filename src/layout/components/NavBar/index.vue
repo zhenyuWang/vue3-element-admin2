@@ -8,12 +8,14 @@
   </div>
   <VisitedViews />
 </template>
+
 <script setup lang="ts">
 import Collapse from "./Collapse.vue"
 import Breadcrumb from "./Breadcrumb.vue"
 import AvatarDropDown from "./AvatarDropDown.vue"
 import VisitedViews from "./VisitedViews.vue"
 </script>
+
 <style lang="scss" scoped>
 .navbar {
   > div:first-child {

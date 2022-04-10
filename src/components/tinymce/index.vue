@@ -4,6 +4,7 @@
 
 <script setup lang="ts">
 import { defineProps, onMounted, onUnmounted } from "vue"
+
 const props = defineProps({
   id: {
     type: String,
@@ -18,8 +19,8 @@ const props = defineProps({
     default: false,
   },
 })
-// tinymce 初始化配置
 onMounted(() => {
+  // tinymce 初始化配置
   ;(window as any).tinymce.init({
     selector: `#${props.id}`,
     readonly: props.readonly,

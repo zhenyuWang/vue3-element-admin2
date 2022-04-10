@@ -38,6 +38,7 @@
     </el-menu-item>
   </template>
 </template>
+
 <script lang="ts">
 export default {
   name: "SliderBarItem",
@@ -46,6 +47,7 @@ export default {
 <script setup lang="ts">
 import { defineProps } from "vue"
 import { _RouteRecordBase } from "vue-router"
+
 defineProps({
   item: {
     type: Object,
@@ -56,6 +58,7 @@ const isOnlyOneChild = (item: any): boolean => {
   return !!item.children && item.children.length === 1
 }
 </script>
+
 <style lang="scss" scoped>
 .el-menu-item {
   a {

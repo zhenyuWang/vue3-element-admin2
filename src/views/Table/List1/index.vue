@@ -36,10 +36,12 @@ export default {
   name: "TableChildList1",
 }
 </script>
+
 <script setup lang="ts">
 import { reactive, ref } from "vue"
 import { useRouter } from "vue-router"
 import { apiList1 } from "@/api/table"
+
 const router = useRouter()
 const list = reactive({
   data: [],

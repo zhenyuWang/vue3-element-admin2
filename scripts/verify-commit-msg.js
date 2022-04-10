@@ -1,11 +1,11 @@
-const chalk = require("chalk");
+const chalk = require("chalk")
 // 添加本行使 win10系统 vscode 终端 console 变色生效
-chalk.level = 1;
-const msgPath = process.env.GIT_PARAMS;
-const msg = require("fs").readFileSync(msgPath, "utf-8").trim();
+chalk.level = 1
 
-const commitRE =
-  /^(revert: )?(feat|fix|polish|docs|style|refactor|perf|test|workflow|ci|chore|types|build)(\(.+\))?: .{1,50}/;
+const msgPath = process.env.GIT_PARAMS
+const msg = require("fs").readFileSync(msgPath, "utf-8").trim()
+
+const commitRE = /^(revert: )?(feat|fix|polish|docs|style|refactor|perf|test|workflow|ci|chore|types|build)(\(.+\))?: .{1,50}/
 
 if (!commitRE.test(msg)) {
   console.error(
@@ -23,6 +23,6 @@ if (!commitRE.test(msg)) {
           `npm run commit`
         )} to interactively generate a commit message.\n`
       )
-  );
-  process.exit(1);
+  )
+  process.exit(1)
 }

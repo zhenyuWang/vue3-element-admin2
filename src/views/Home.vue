@@ -6,12 +6,15 @@
     />
   </div>
 </template>
+
 <script lang="ts">
 "Home"
 </script>
+
 <script setup lang="ts">
 import HelloWorld from "@/components/HelloWorld.vue"
 </script>
+
 <style lang="scss" scoped>
 .box {
   padding-top: 100px;

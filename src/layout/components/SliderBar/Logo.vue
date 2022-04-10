@@ -4,6 +4,7 @@
     <h1 class="pl-20 c-fff font-size-14">Vue3-element-admin</h1>
   </div>
 </template>
+
 <style lang="scss" scoped>
 .logo_box {
   width: 230px;

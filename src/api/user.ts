@@ -1,5 +1,6 @@
 import request from "@/utils/request"
 import type { Method } from "@/types/request"
+
 const curryRequest = (
   url: string,
   method: Method,
@@ -7,14 +8,14 @@ const curryRequest = (
 ) => {
   return request(`/module/user/${url}`, method, data)
 }
-// 登录
+
 export function apiLogin(data: {
   name: string
   password: string
 }): Promise<any> {
   return curryRequest("login", "post", data)
 }
-// 退出登录
+
 export function apiSignOut(): Promise<any> {
   return curryRequest("signOut", "post")
 }
