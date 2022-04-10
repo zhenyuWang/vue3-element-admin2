@@ -13,7 +13,7 @@ A background management system based on `Vite+Vue3+Vue Router+Pinia+TS+ElementPl
 #### Installation
 
 ```shell
-pnpm
+pnpm install
 ```
 
 #### Start service

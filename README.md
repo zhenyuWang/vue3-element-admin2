@@ -13,7 +13,7 @@
 #### 安装
 
 ```shell
-pnpm
+pnpm install
 ```
 
 #### 启动服务
