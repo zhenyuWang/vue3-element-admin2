@@ -2,7 +2,7 @@
   <div class="box t-center">
     <img src="@/assets/img/snail.png" alt="" />
     <hello-world
-      msg="Vite2 + Vue3 + Pinia + ElementPlus + TS + jest + cypress buy running snail!"
+      msg="Welcome to Vite2 + Vue3 + Pinia + ElementPlus + TS + jest + cypress buy running snail!"
     />
   </div>
 </template>
